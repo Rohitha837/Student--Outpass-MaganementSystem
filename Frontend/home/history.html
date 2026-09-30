@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Outpass History</title>
+
+    <link rel="stylesheet" href="history.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>🎓 Outpass</h2>
+
+        <nav>
+            <a href="student-dashboard.html">Dashboard</a>
+            <a href="apply-outpass.html">Apply Outpass</a>
+            <a href="my-requests.html">My Requests</a>
+            <a href="history.html" class="active">History</a>
+        </nav>
+
+        <a href="index.html" class="logout">Logout</a>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+                <h1>Outpass History</h1>
+                <p>View your previous outpass requests</p>
+            </div>
+
+        </header>
+
+
+        <!-- History -->
+
+        <section class="history-container">
+
+            <div class="history-card">
+
+                <div class="history-top">
+
+                    <div>
+                        <h3>#OUT002</h3>
+                        <p>Tirupati</p>
+                    </div>
+
+                    <span class="status approved">
+                        Approved
+                    </span>
+
+                </div>
+
+                <div class="history-details">
+
+                    <div>
+                        <strong>From</strong>
+                        <p>25-09-2026</p>
+                    </div>
+
+                    <div>
+                        <strong>To</strong>
+                        <p>25-09-2026</p>
+                    </div>
+
+                    <div>
+                        <strong>Type</strong>
+                        <p>Normal</p>
+                    </div>
+
+                </div>
+
+                <p class="reason">
+                    Reason: Personal work
+                </p>
+
+            </div>
+
+
+            <div class="history-card">
+
+                <div class="history-top">
+
+                    <div>
+                        <h3>#OUT003</h3>
+                        <p>Home</p>
+                    </div>
+
+                    <span class="status rejected">
+                        Rejected
+                    </span>
+
+                </div>
+
+                <div class="history-details">
+
+                    <div>
+                        <strong>From</strong>
+                        <p>20-09-2026</p>
+                    </div>
+
+                    <div>
+                        <strong>To</strong>
+                        <p>21-09-2026</p>
+                    </div>
+
+                    <div>
+                        <strong>Type</strong>
+                        <p>Emergency</p>
+                    </div>
+
+                </div>
+
+                <p class="reason">
+                    Reason: Family emergency
+                </p>
+
+            </div>
+
+
+            <div class="empty-history" id="emptyHistory">
+
+                <p>No previous outpass records found.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

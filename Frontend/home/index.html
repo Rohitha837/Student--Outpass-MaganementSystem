@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Outpass Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="login-box">
+       
+
+    <div class="logo">
+        🎓
+    </div>
+
+    <h1>Student Outpass</h1>
+
+    <p>Management System</p>
+    <!-- Back to Home -->
+            <a href="home.html" class="back-home">
+                ← Back to Home
+            </a>
+            <form id="loginForm">
+
+                <label for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Enter your username"
+                >
+<small id="usernameError" class="error"></small>
+                <div class="password-container">
+
+    <input 
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+    >
+
+    <button type="button" id="togglePassword">
+        👁️
+    </button>
+
+</div>
+                <small id="passwordError" class="error"></small>
+                <label for="role">Select Role</label>
+
+<select id="role">
+    <option value="">Select your role</option>
+    <option value="student">Student</option>
+    <option value="mentor">Mentor</option>
+    <option value="faculty">Faculty</option>
+    <option value="hod">HOD</option>
+    <option value="admin">Admin</option>
+</select>
+<small id="roleError" class="error"></small>
+<div class="login-options">
+
+    <label class="remember">
+        <input type="checkbox" id="remember">
+        Remember me
+    </label>
+
+    <a href="#" class="forgot-password">
+        Forgot Password?
+    </a>
+
+</div>
+
+                <button type="submit">Login</button>
+
+            </form>
+
+        </div>
+
+    </div>
+ <footer>
+    © 2026 Student Outpass Management System
+</footer>
+
+</body>
+
+</html>

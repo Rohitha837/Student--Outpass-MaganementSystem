@@ -1,0 +1,279 @@
+
+/* Remove default spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Full page */
+
+    body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+/* Outer container */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login box */
+.login-box {
+    width: 380px;
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.login-box h1 {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #1e3a8a;
+    font-size: 28px;
+}
+
+
+/* Description */
+.login-box p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Labels */
+.login-box label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* Input fields */
+.login-box input {
+    width: 100%;
+    padding: 12px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+/* Input focus */
+.login-box input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* Login button */
+.login-box button {
+    width: 100%;
+    padding: 13px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.login-box button:hover {
+    background: #1e3a8a;
+    transform: translateY(-2px);
+}
+.login-box select {
+    width: 100%;
+    padding: 12px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-size: 15px;
+    background: white;
+}
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+}
+
+.remember {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    margin: 0 !important;
+    font-weight: normal !important;
+}
+
+.remember input {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.forgot-password {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+.error {
+    display: block;
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+}
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    padding-right: 45px;
+}
+
+#togglePassword {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: auto;
+    padding: 5px;
+
+    background: transparent;
+    color: #333;
+
+    border: none;
+
+    font-size: 18px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    padding-right: 45px;
+}
+
+#togglePassword {
+    position: absolute;
+
+    right: 10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: auto;
+    padding: 5px;
+
+    background: transparent;
+    color: #333;
+
+    border: none;
+
+    font-size: 18px;
+}
+
+#togglePassword:hover {
+    background: transparent;
+    transform: translateY(-50%);
+}
+.login-box button {
+    width: 100%;
+}
+.logo {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #eff6ff;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+}
+
+footer {
+    position: fixed;
+    bottom: 15px;
+
+    width: 100%;
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 12px;
+}
+@media (max-width: 500px) {
+
+    .login-box {
+        width: 90%;
+        padding: 30px 25px;
+    }
+
+    .login-box h1 {
+        font-size: 24px;
+    }
+
+    footer {
+        font-size: 11px;
+    }
+}
+.back-home {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.back-home:hover {
+    text-decoration: underline;
+}

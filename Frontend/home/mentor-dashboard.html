@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mentor Dashboard</title>
+
+    <link rel="stylesheet" href="mentor-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>🎓 Outpass</h2>
+
+        <nav>
+            <a href="mentor-dashboard.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="#">
+                Pending Requests
+            </a>
+
+            <a href="#">
+                Approved Requests
+            </a>
+
+            <a href="#">
+                History
+            </a>
+        </nav>
+
+        <a href="index.html" class="logout">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Mentor Dashboard</h1>
+                <p>Welcome back, Mentor!</p>
+            </div>
+
+            <div class="profile">
+                👤 Mentor
+            </div>
+
+        </header>
+
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>📋</span>
+                <h3>Total Requests</h3>
+                <strong>12</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>⏳</span>
+                <h3>Pending</h3>
+                <strong>5</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>✅</span>
+                <h3>Approved</h3>
+                <strong>6</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>❌</span>
+                <h3>Rejected</h3>
+                <strong>1</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Pending Requests -->
+
+        <section class="requests-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Pending Outpass Requests</h2>
+                    <p>Review requests submitted by students.</p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Student</th>
+                            <th>Destination</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#OUT004</td>
+
+                            <td>
+                                Rohit Kumar
+                            </td>
+
+                            <td>
+                                Chittoor
+                            </td>
+
+                            <td>
+                                30-09-2026
+                            </td>
+
+                            <td>
+                                <span class="normal-badge">
+                                    Normal
+                                </span>
+                            </td>
+
+                            <td class="actions">
+
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#OUT005</td>
+
+                            <td>
+                                Priya S
+                            </td>
+
+                            <td>
+                                Tirupati
+                            </td>
+
+                            <td>
+                                01-10-2026
+                            </td>
+
+                            <td>
+                                <span class="normal-badge">
+                                    Normal
+                                </span>
+                            </td>
+
+                            <td class="actions">
+
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr class="emergency-row">
+
+                            <td>#OUT006</td>
+
+                            <td>
+                                Anjali R
+                            </td>
+
+                            <td>
+                                Home
+                            </td>
+
+                            <td>
+                                30-09-2026
+                            </td>
+
+                            <td>
+                                <span class="emergency-badge">
+                                    🚨 Emergency
+                                </span>
+                            </td>
+
+                            <td class="actions">
+
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+<!-- Request Details Modal -->
+
+<div id="requestModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Outpass Request Details</h2>
+
+            <button id="closeModal" class="close-btn">
+                &times;
+            </button>
+        </div>
+
+
+        <div class="request-details">
+
+            <div class="detail-item">
+                <strong>Request ID</strong>
+                <p id="detailId">#OUT004</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>Student Name</strong>
+                <p id="detailStudent">Rohit Kumar</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>Destination</strong>
+                <p id="detailDestination">Chittoor</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>From Date</strong>
+                <p id="detailFromDate">30-09-2026</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>To Date</strong>
+                <p id="detailToDate">30-09-2026</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>Out Time</strong>
+                <p id="detailOutTime">10:00 AM</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>Return Time</strong>
+                <p id="detailReturnTime">05:00 PM</p>
+            </div>
+
+            <div class="detail-item">
+                <strong>Request Type</strong>
+                <p id="detailType">Normal</p>
+            </div>
+
+            <div class="detail-item full-width">
+                <strong>Reason</strong>
+                <p id="detailReason">
+                    Personal work at Chittoor.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button class="approve-btn">
+                Approve
+            </button>
+
+            <button class="reject-btn">
+                Reject
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="../js/mentor.js"></script>
+</body>
+
+</html>

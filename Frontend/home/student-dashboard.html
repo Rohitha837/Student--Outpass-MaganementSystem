@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>🎓 Outpass</h2>
+
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Apply Outpass</a>
+            <a href="#">My Requests</a>
+            <a href="#">History</a>
+        </nav>
+
+        <a href="../index.html" class="logout">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Student Dashboard</h1>
+                <p>Welcome back, Student!</p>
+            </div>
+
+            <div class="profile">
+                👤 Student
+            </div>
+
+        </header>
+
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>📝</span>
+                <h3>Total Requests</h3>
+                <strong>0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>⏳</span>
+                <h3>Pending</h3>
+                <strong>0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>✅</span>
+                <h3>Approved</h3>
+                <strong>0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>❌</span>
+                <h3>Rejected</h3>
+                <strong>0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Quick Actions -->
+
+        <section class="quick-actions">
+
+            <h2>Quick Actions</h2>
+
+            <div class="action-container">
+
+                <a href="apply-outpass.html" class="action-card">
+    📝
+    <h3>Apply Outpass</h3>
+    <p>Submit a new outpass request.</p>
+</a>
+
+                <a href="#" class="action-card">
+                    📋
+                    <h3>My Requests</h3>
+                    <p>View your current requests.</p>
+                </a>
+
+                <a href="#" class="action-card">
+                    📚
+                    <h3>History</h3>
+                    <p>View previous outpasses.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Recent Requests -->
+
+        <section class="recent">
+
+            <h2>Recent Requests</h2>
+
+            <div class="empty-state">
+                <p>No outpass requests yet.</p>
+
+                <a href="#" class="primary-btn">
+                    Apply for Outpass
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

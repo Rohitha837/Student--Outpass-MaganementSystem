@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Requests</title>
+
+    <link rel="stylesheet" href="my-requests.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>🎓 Outpass</h2>
+
+        <nav>
+           <a href="student-dashboard.html">Dashboard</a>
+           <a href="apply-outpass.html">Apply Outpass</a>
+           <a href="my-requests.html">My Requests</a>
+           <a href="history.html">History</a>
+        </nav>
+
+        <a href="index.html" class="logout">Logout</a>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+                <h1>My Requests</h1>
+                <p>View and track your outpass requests</p>
+            </div>
+
+            <a href="apply-outpass.html" class="apply-btn">
+                + Apply Outpass
+            </a>
+
+        </header>
+
+
+        <!-- Filter -->
+
+        <section class="filter-section">
+
+            <label for="statusFilter">Filter by Status</label>
+
+            <select id="statusFilter">
+
+                <option value="all">All Requests</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+
+            </select>
+
+        </section>
+
+
+        <!-- Requests Table -->
+
+        <section class="requests-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Destination</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>#OUT001</td>
+                        <td>Chittoor</td>
+                        <td>29-09-2026</td>
+                        <td>29-09-2026</td>
+                        <td>Normal</td>
+                        <td>
+                            <span class="status pending">
+                                Pending
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#OUT002</td>
+                        <td>Tirupati</td>
+                        <td>25-09-2026</td>
+                        <td>25-09-2026</td>
+                        <td>Normal</td>
+                        <td>
+                            <span class="status approved">
+                                Approved
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#OUT003</td>
+                        <td>Home</td>
+                        <td>20-09-2026</td>
+                        <td>21-09-2026</td>
+                        <td>Emergency</td>
+                        <td>
+                            <span class="status rejected">
+                                Rejected
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
