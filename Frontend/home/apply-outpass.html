@@ -1,159 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Apply Outpass</title>
+    <title>Apply Outpass | Student Outpass Management System</title>
 
     <link rel="stylesheet" href="apply-outpass.css">
+
 </head>
+
 
 <body>
 
-    <!-- Sidebar -->
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
     <aside class="sidebar">
 
-        <h2>🎓 Outpass</h2>
+        <div class="logo">
+            🎓
+        </div>
+
+        <h2>Outpass System</h2>
+
 
         <nav>
-            <a href="student-dashboard.html">Dashboard</a>
-            <a href="apply-outpass.html" class="active">Apply Outpass</a>
-            <a href="#">My Requests</a>
-            <a href="#">History</a>
-        </nav>
 
-        <a href="../index.html" class="logout">Logout</a>
+            <a href="student-dashboard.html">
+                🏠 Dashboard
+            </a>
+
+
+            <a href="apply-outpass.html" class="active">
+                📝 Apply Outpass
+            </a>
+
+
+            <a href="my-requests.html">
+                📋 My Requests
+            </a>
+
+
+            <a href="history.html">
+                📜 History
+            </a>
+
+
+            <a href="index.html" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
 
     </aside>
 
 
-    <!-- Main Content -->
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
     <main class="main-content">
 
-        <header class="page-header">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
             <div>
-                <h1>Apply for Outpass</h1>
-                <p>Submit your outpass request</p>
+
+                <h1>Apply Outpass</h1>
+
+                <p>
+                    Submit a new outpass request.
+                </p>
+
             </div>
+
+
+            <div class="profile">
+
+                👤 Student
+
+            </div>
+
         </header>
 
 
-        <!-- Outpass Form -->
+
+        <!-- =========================
+             OUTPASS FORM
+        ========================== -->
+
         <section class="form-container">
+
 
             <form id="outpassForm">
 
-                <div class="form-group">
-                    <label for="destination">Destination</label>
-                    <input
-                        type="text"
-                        id="destination"
-                        placeholder="Enter destination"
-                    >
+
+                <!-- Student Information -->
+
+                <div class="form-section">
+
+                    <h2>Student Information</h2>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="studentName">
+                                Student Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="studentName"
+                                placeholder="Enter student name"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="studentId">
+                                Student ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="studentId"
+                                placeholder="Enter student ID"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="department">
+                                Department
+                            </label>
+
+                            <select
+                                id="department"
+                                required
+                            >
+
+                
+
+                                <option value="CSE">
+                                    Computer Science & Engineering
+                                </option>
+
+                                <option value="ECE">
+                                    Electronics & Communication
+                                </option>
+
+                                <option value="EEE">
+                                    Electrical & Electronics
+                                </option>
+
+                                <option value="MECH">
+                                    Mechanical Engineering
+                                </option>
+
+                                <option value="CIVIL">
+                                    Civil Engineering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="year">
+                                Year
+                            </label>
+
+                            <select
+                                id="year"
+                                required
+                            >
+
+
+                                <option value="1">
+                                    1st Year
+                                </option>
+
+                                <option value="2">
+                                    2nd Year
+                                </option>
+
+                                <option value="3">
+                                    3rd Year
+                                </option>
+
+                                <option value="4">
+                                    4th Year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
                 </div>
 
 
-                <div class="form-group">
-                    <label for="reason">Reason</label>
-                    <textarea
-                        id="reason"
-                        rows="4"
-                        placeholder="Enter reason for outpass"
-                    ></textarea>
-                </div>
 
+                <!-- Outpass Details -->
 
-                <div class="form-row">
+                <div class="form-section">
+
+                    <h2>Outpass Details</h2>
+
 
                     <div class="form-group">
-                        <label for="fromDate">From Date</label>
-                        <input type="date" id="fromDate">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="toDate">To Date</label>
-                        <input type="date" id="toDate">
-                    </div>
-
-                </div>
-
-
-                <div class="form-row">
-
-                    <div class="form-group">
-                        <label for="outTime">Out Time</label>
-                        <input type="time" id="outTime">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="returnTime">Return Time</label>
-                        <input type="time" id="returnTime">
-                    </div>
-
-                </div>
-
-
-                <!-- Emergency Request -->
-                <div class="emergency-box">
-
-                    <label class="checkbox-label">
+                        <label for="destination">
+                            Destination
+                        </label>
 
                         <input
-                            type="checkbox"
-                            id="emergency"
+                            type="text"
+                            id="destination"
+                            placeholder="Enter destination"
+                            required
                         >
 
-                        <span>
-                            🚨 Emergency Outpass
-                        </span>
+                    </div>
 
-                    </label>
 
-                    <p>
-                        Select this option only for emergency situations.
-                    </p>
+
+                    <div class="form-group">
+
+                        <label for="reason">
+                            Reason for Outpass
+                        </label>
+
+                        <textarea
+                            id="reason"
+                            rows="4"
+                            placeholder="Enter reason for requesting outpass"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="fromDate">
+                                From Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fromDate"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="toDate">
+                                To Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="toDate"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="outTime">
+                                Out Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="outTime"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="returnTime">
+                                Expected Return Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="returnTime"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
-                    <label for="remarks">Additional Remarks</label>
 
-                    <textarea
-                        id="remarks"
-                        rows="3"
-                        placeholder="Any additional information..."
-                    ></textarea>
+                <!-- Request Type -->
+
+                <div class="form-section">
+
+                    <h2>Request Type</h2>
+
+
+                    <div class="form-group">
+
+                        <label for="requestType">
+                            Outpass Type
+                        </label>
+
+                        <select
+                            id="requestType"
+                            required
+                        >
+
+                            <option value="normal">
+                                Normal Outpass
+                            </option>
+
+                            <option value="emergency">
+                                Emergency Outpass
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="remarks">
+                            Additional Remarks
+                        </label>
+
+                        <textarea
+                            id="remarks"
+                            rows="3"
+                            placeholder="Enter any additional information..."
+                        ></textarea>
+
+                    </div>
+
                 </div>
 
+
+
+                <!-- Important Information -->
+
+                <div class="info-box">
+
+                    <h3>📌 Important</h3>
+
+                    <ul>
+
+                        <li>
+                            Make sure all details are correct before submitting.
+                        </li>
+
+                        <li>
+                            Your request will be sent for approval.
+                        </li>
+
+                        <li>
+                            Emergency requests should be used only when necessary.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Form Buttons -->
 
                 <div class="form-actions">
 
-                    <a
-                        href="student-dashboard.html"
-                        class="cancel-btn"
-                    >
-                        Cancel
-                    </a>
 
                     <button
                         type="submit"
                         class="submit-btn"
                     >
-                        Submit Request
+                        Submit Outpass Request
                     </button>
 
+
+
+                    <button
+                        type="reset"
+                        class="cancel-btn"
+                    >
+                        Clear Form
+                    </button>
+
+
                 </div>
+
 
             </form>
 
         </section>
 
+
     </main>
 
 
-    <script src="../js/student.js"></script>
+
+    <!-- JavaScript -->
+
+    <script src="student.js"></script>
+
 
 </body>
+
 </html>

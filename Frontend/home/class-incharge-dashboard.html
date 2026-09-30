@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Class Incharge Dashboard</title>
+
+    <link rel="stylesheet" href="class-incharge-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            🎓
+        </div>
+
+        <h2>Outpass System</h2>
+
+        <nav>
+
+            <a href="class-incharge-dashboard.html" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="#">
+                📋 Pending Requests
+            </a>
+
+            <a href="#">
+                ✅ Approved Requests
+            </a>
+
+            <a href="#">
+                ❌ Rejected Requests
+            </a>
+
+            <a href="#">
+                📜 History
+            </a>
+
+            <a href="index.html" class="logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="topbar">
+
+            <div>
+                <h1>Class Incharge Dashboard</h1>
+                <p>Manage and review student outpass requests.</p>
+            </div>
+
+            <div class="profile">
+                👤 Class Incharge
+            </div>
+
+        </header>
+
+
+        <!-- Statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <div class="stat-icon">📋</div>
+
+                <div>
+                    <h3>12</h3>
+                    <p>Pending Requests</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+
+                <div>
+                    <h3>25</h3>
+                    <p>Approved</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">❌</div>
+
+                <div>
+                    <h3>3</h3>
+                    <p>Rejected</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+
+                <div>
+                    <h3>40</h3>
+                    <p>Total Requests</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Pending Requests -->
+        <section class="requests-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Pending Outpass Requests</h2>
+                    <p>Review requests submitted by students.</p>
+                </div>
+
+                <button class="view-all-btn">
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Student</th>
+                            <th>Destination</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#OUT007</td>
+
+                            <td>
+                                Rahul Kumar
+                            </td>
+
+                            <td>
+                                Chittoor
+                            </td>
+
+                            <td>
+                                30-09-2026
+                            </td>
+
+                            <td>
+                                Normal
+                            </td>
+
+                            <td>
+                                <span class="status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#OUT008</td>
+
+                            <td>
+                                Priya Sharma
+                            </td>
+
+                            <td>
+                                Tirupati
+                            </td>
+
+                            <td>
+                                01-10-2026
+                            </td>
+
+                            <td>
+                                Emergency
+                            </td>
+
+                            <td>
+                                <span class="status emergency">
+                                    Emergency
+                                </span>
+                            </td>
+
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#OUT009</td>
+
+                            <td>
+                                Arjun Reddy
+                            </td>
+
+                            <td>
+                                Home
+                            </td>
+
+                            <td>
+                                02-10-2026
+                            </td>
+
+                            <td>
+                                Normal
+                            </td>
+
+                            <td>
+                                <span class="status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+
+                                <button class="approve-btn">
+                                    Approve
+                                </button>
+
+                                <button class="reject-btn">
+                                    Reject
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Request Details Modal -->
+        <div class="modal" id="requestModal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>Outpass Request Details</h2>
+
+                    <button class="close-btn" id="closeModal">
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div class="request-details">
+
+                    <p>
+                        <strong>Request ID:</strong>
+                        #OUT007
+                    </p>
+
+                    <p>
+                        <strong>Student:</strong>
+                        Rahul Kumar
+                    </p>
+
+                    <p>
+                        <strong>Destination:</strong>
+                        Chittoor
+                    </p>
+
+                    <p>
+                        <strong>Reason:</strong>
+                        Personal work
+                    </p>
+
+                    <p>
+                        <strong>From Date:</strong>
+                        30-09-2026
+                    </p>
+
+                    <p>
+                        <strong>To Date:</strong>
+                        30-09-2026
+                    </p>
+
+                    <p>
+                        <strong>Out Time:</strong>
+                        10:00 AM
+                    </p>
+
+                    <p>
+                        <strong>Return Time:</strong>
+                        04:00 PM
+                    </p>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button class="approve-btn">
+                        Approve Request
+                    </button>
+
+                    <button class="reject-btn">
+                        Reject Request
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+<script src="class-incharge.js"></script>
+</body>
+
+</html>

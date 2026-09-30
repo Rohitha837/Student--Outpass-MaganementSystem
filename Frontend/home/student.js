@@ -1,62 +1,51 @@
-const outpassForm = document.getElementById("outpassForm");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (outpassForm) {
+    const outpassForm = document.getElementById("outpassForm");
+
+    if (!outpassForm) {
+        console.error("outpassForm not found");
+        return;
+    }
 
     outpassForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
-        const destination =
-            document.getElementById("destination").value.trim();
+        const studentName = document.getElementById("studentName").value.trim();
+        const studentId = document.getElementById("studentId").value.trim();
+        const department = document.getElementById("department").value;
+        const year = document.getElementById("year").value;
 
-        const reason =
-            document.getElementById("reason").value.trim();
+        const destination = document.getElementById("destination").value.trim();
+        const reason = document.getElementById("reason").value.trim();
 
-        const fromDate =
-            document.getElementById("fromDate").value;
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
 
-        const toDate =
-            document.getElementById("toDate").value;
+        const outTime = document.getElementById("outTime").value;
+        const returnTime = document.getElementById("returnTime").value;
 
-        const outTime =
-            document.getElementById("outTime").value;
+        const requestType = document.getElementById("requestType").value;
 
-        const returnTime =
-            document.getElementById("returnTime").value;
-
-        const emergency =
-            document.getElementById("emergency").checked;
+        const remarks = document.getElementById("remarks").value.trim();
 
 
-        // Basic validation
+        // Required fields validation
 
-        if (destination === "") {
-            alert("Please enter destination.");
-            return;
-        }
-
-        if (reason === "") {
-            alert("Please enter the reason.");
-            return;
-        }
-
-        if (fromDate === "") {
-            alert("Please select From Date.");
-            return;
-        }
-
-        if (toDate === "") {
-            alert("Please select To Date.");
-            return;
-        }
-
-        if (outTime === "") {
-            alert("Please select Out Time.");
-            return;
-        }
-
-        if (returnTime === "") {
-            alert("Please select Return Time.");
+        if (
+            studentName === "" ||
+            studentId === "" ||
+            department === "" ||
+            year === "" ||
+            destination === "" ||
+            reason === "" ||
+            fromDate === "" ||
+            toDate === "" ||
+            outTime === "" ||
+            returnTime === "" ||
+            requestType === ""
+        ) {
+            alert("Please fill all required fields.");
             return;
         }
 
@@ -64,38 +53,102 @@ if (outpassForm) {
         // Date validation
 
         if (toDate < fromDate) {
-            alert("To Date cannot be before From Date.");
+            alert("Return date cannot be before the outpass date.");
             return;
         }
 
 
-        // Time validation for same day
+        // Time validation
 
-        if (fromDate === toDate && returnTime <= outTime) {
-            alert("Return Time must be after Out Time.");
+        if (
+            fromDate === toDate &&
+            returnTime <= outTime
+        ) {
+            alert("Expected return time must be later than out time.");
             return;
         }
+
+
+        // Get existing requests
+
+        let requests = JSON.parse(
+            localStorage.getItem("outpassRequests")
+        ) || [];
+
+
+        // Create request ID
+
+        const requestId =
+            "OUT" + String(Date.now()).slice(-6);
+
+
+        // Create new request
+
+        const newRequest = {
+
+            id: requestId,
+
+            studentName: studentName,
+
+            studentId: studentId,
+
+            department: department,
+
+            year: year,
+
+            destination: destination,
+
+            reason: reason,
+
+            fromDate: fromDate,
+
+            toDate: toDate,
+
+            outTime: outTime,
+
+            returnTime: returnTime,
+
+            requestType: requestType,
+
+            remarks: remarks,
+
+            status: "Pending",
+
+            submittedAt: new Date().toLocaleString()
+        };
+
+
+        // Add request
+
+        requests.push(newRequest);
+
+
+        // Save request
+
+        localStorage.setItem(
+            "outpassRequests",
+            JSON.stringify(requests)
+        );
 
 
         // Success message
 
-        if (emergency) {
-
-            alert(
-                "Emergency outpass request submitted successfully!"
-            );
-
-        } else {
-
-            alert(
-                "Outpass request submitted successfully!"
-            );
-        }
+        alert(
+            "Outpass request submitted successfully!\n\n" +
+            "Request ID: #" + requestId +
+            "\nStatus: Pending"
+        );
 
 
         // Clear form
 
         outpassForm.reset();
 
+
+        // Open My Requests
+
+        window.location.href = "my-requests.html";
+
     });
-}
+
+});
