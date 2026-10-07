@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Student registration for Student Outpass Management System"
+    >
+
+    <title>Student Sign Up | Outpass Management System</title>
+
+    <link
+        rel="stylesheet"
+        href="signup.css"
+    >
+</head>
+
+<body>
+
+    <main class="signup-page">
+
+        <section
+            class="signup-card"
+            aria-labelledby="signup-title"
+        >
+
+            <!-- Brand -->
+            <div class="brand">
+
+                <div
+                    class="brand-icon"
+                    aria-hidden="true"
+                >
+                    🎓
+                </div>
+
+                <h1>
+                    Student Outpass
+                </h1>
+
+                <p>
+                    Management System
+                </p>
+
+            </div>
+
+
+            <!-- Heading -->
+            <div class="signup-heading">
+
+                <h2 id="signup-title">
+                    Create Student Account
+                </h2>
+
+                <p>
+                    Register your account to request and manage outpasses.
+                </p>
+
+            </div>
+
+
+            <!-- Registration Form -->
+            <form
+                id="signupForm"
+                novalidate
+            >
+
+                <!-- Student ID -->
+                <div class="form-group">
+
+                    <label for="student_id">
+                        Student ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="student_id"
+                        name="student_id"
+                        placeholder="Example: 23CSE002"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Name -->
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Department -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="department">
+                            Department
+                        </label>
+
+                        <input
+                            type="text"
+                            id="department"
+                            name="department"
+                            placeholder="CSE"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Year -->
+                    <div class="form-group">
+
+                        <label for="year">
+                            Year
+                        </label>
+
+                        <select
+                            id="year"
+                            name="year"
+                            required
+                        >
+
+                            <option value="">
+                                Select Year
+                            </option>
+
+                            <option value="1">
+                                1st Year
+                            </option>
+
+                            <option value="2">
+                                2nd Year
+                            </option>
+
+                            <option value="3">
+                                3rd Year
+                            </option>
+
+                            <option value="4">
+                                4th Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Section + Phone -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="section">
+                            Section
+                        </label>
+
+                        <input
+                            type="text"
+                            id="section"
+                            name="section"
+                            placeholder="A"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone_number">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone_number"
+                            name="phone_number"
+                            placeholder="10-digit number"
+                            autocomplete="tel"
+                            maxlength="15"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Minimum 8 characters"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                    <small>
+                        Use at least 8 characters.
+                    </small>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    class="signup-btn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- Verification Notice -->
+            <div class="verification-note">
+
+                <strong>
+                    Account Verification
+                </strong>
+
+                <p>
+                    Your account will require verification before
+                    you can access the student dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- Login Link -->
+            <div class="login-section">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="index.html">
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <!-- Home -->
+            <div class="back-home">
+
+                <a href="home.html">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="signup.js"></script>
+
+</body>
+
+</html>

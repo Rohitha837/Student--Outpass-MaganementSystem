@@ -1,197 +1,193 @@
-document.addEventListener("DOMContentLoaded", function () {
+const API_URL = "http://127.0.0.1:8000";
 
-    const requestsTable =
-        document.getElementById("requestsTable");
+const requestsTable = document.getElementById("requestsTable");
+const statusFilter = document.getElementById("statusFilter");
 
-    const statusFilter =
-        document.getElementById("statusFilter");
+let allRequests = [];
 
 
-    function getRequests() {
+async function loadRequests() {
 
-        return JSON.parse(
-            localStorage.getItem("outpassRequests")
-        ) || [];
+    requestsTable.innerHTML = `
+        <tr>
+            <td colspan="7">
+                Loading requests...
+            </td>
+        </tr>
+    `;
 
-    }
+    try {
 
-
-    function displayRequests(filter = "all") {
-
-        const requests = getRequests();
-
-        requestsTable.innerHTML = "";
-
-
-        let filteredRequests = requests;
-
-
-        if (filter !== "all") {
-
-            filteredRequests = requests.filter(function (request) {
-
-                return request.status.toLowerCase() === filter;
-
-            });
-
-        }
-
-
-        if (filteredRequests.length === 0) {
-
-            requestsTable.innerHTML = `
-                <tr>
-                    <td colspan="7" class="no-data">
-                        No outpass requests found.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        filteredRequests.forEach(function (request) {
-
-            const row =
-                document.createElement("tr");
-
-
-            const type =
-                request.requestType === "emergency"
-                    ? "Emergency"
-                    : "Normal";
-
-
-            row.innerHTML = `
-
-                <td>
-                    #${request.id}
-                </td>
-
-                <td>
-                    ${request.destination}
-                </td>
-
-                <td>
-                    ${request.fromDate}
-                </td>
-
-                <td>
-                    ${request.toDate}
-                </td>
-
-                <td>
-                    ${type}
-                </td>
-
-                <td>
-
-                    <span class="status ${request.status.toLowerCase()}">
-                        ${request.status}
-                    </span>
-
-                </td>
-
-                <td>
-
-                    <button
-                        class="view-btn"
-                        onclick="viewRequest('${request.id}')">
-
-                        View
-
-                    </button>
-
-                </td>
-
-            `;
-
-
-            requestsTable.appendChild(row);
-
-        });
-
-    }
-
-
-    window.viewRequest = function (requestId) {
-
-        const requests = getRequests();
-
-
-        const request =
-            requests.find(function (item) {
-
-                return item.id === requestId;
-
-            });
-
-
-        if (!request) {
-
-            alert("Request not found.");
-
-            return;
-
-        }
-
-
-        alert(
-
-            "OUTPASS DETAILS\n\n" +
-
-            "Request ID: #" + request.id +
-
-            "\nStudent Name: " + request.studentName +
-
-            "\nStudent ID: " + request.studentId +
-
-            "\nDepartment: " + request.department +
-
-            "\nYear: " + request.year +
-
-            "\nDestination: " + request.destination +
-
-            "\nReason: " + request.reason +
-
-            "\nFrom Date: " + request.fromDate +
-
-            "\nTo Date: " + request.toDate +
-
-            "\nOut Time: " + request.outTime +
-
-            "\nReturn Time: " + request.returnTime +
-
-            "\nType: " +
-
-            (request.requestType === "emergency"
-                ? "Emergency"
-                : "Normal") +
-
-            "\nStatus: " + request.status +
-
-            "\nRemarks: " + request.remarks
-
+        const response = await fetch(
+            `${API_URL}/outpasses/my-requests`
         );
 
-    };
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail || "Unable to load requests."
+            );
+
+        }
+
+        allRequests = data;
+
+        displayRequests();
+
+    } catch (error) {
+
+        console.error("Error loading requests:", error);
+
+        requestsTable.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    Unable to load requests.
+                </td>
+            </tr>
+        `;
+
+    }
+}
 
 
-    if (statusFilter) {
+function displayRequests() {
 
-        statusFilter.addEventListener(
-            "change",
-            function () {
+    const selectedStatus = statusFilter.value;
 
-                displayRequests(this.value);
+    let filteredRequests = allRequests;
 
-            }
+
+    if (selectedStatus !== "all") {
+
+        filteredRequests = allRequests.filter(
+            request =>
+                request.status === selectedStatus
         );
 
     }
 
 
-    displayRequests();
+    if (filteredRequests.length === 0) {
 
-});
+        requestsTable.innerHTML = `
+            <tr>
+                <td colspan="7" class="no-data">
+                    No outpass requests found.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    requestsTable.innerHTML = "";
+
+
+    filteredRequests.forEach(request => {
+
+        const row = document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${request.request_id}
+            </td>
+
+            <td>
+                ${request.destination}
+            </td>
+
+            <td>
+                ${request.from_date}
+            </td>
+
+            <td>
+                ${request.to_date}
+            </td>
+
+            <td>
+                ${request.request_type}
+            </td>
+
+            <td>
+                <span class="status ${request.status.toLowerCase()}">
+                    ${request.status}
+                </span>
+            </td>
+
+            <td>
+                <button
+                    type="button"
+                    class="view-btn"
+                    onclick="viewRequest(${request.id})">
+
+                    View
+
+                </button>
+            </td>
+
+        `;
+
+
+        requestsTable.appendChild(row);
+
+    });
+
+}
+
+
+function viewRequest(requestId) {
+
+    const request = allRequests.find(
+        item => item.id === requestId
+    );
+
+
+    if (!request) {
+
+        alert("Request not found.");
+
+        return;
+
+    }
+
+
+    alert(
+
+        "OUTPASS DETAILS\n\n" +
+
+        "Request ID: " + request.request_id +
+
+        "\nDestination: " + request.destination +
+
+        "\nFrom Date: " + request.from_date +
+
+        "\nTo Date: " + request.to_date +
+
+        "\nOut Time: " + request.out_time +
+
+        "\nReturn Time: " + request.return_time +
+
+        "\nRequest Type: " + request.request_type +
+
+        "\nReason: " + request.reason +
+
+        "\nStatus: " + request.status
+
+    );
+
+}
+
+
+statusFilter.addEventListener(
+    "change",
+    displayRequests
+);
+
+
+loadRequests();

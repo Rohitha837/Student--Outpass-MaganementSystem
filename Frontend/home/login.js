@@ -1,57 +1,129 @@
+// ============================================================
+// STUDENT LOGIN
+// ============================================================
+
 const loginForm = document.getElementById("loginForm");
 
-loginForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+if (loginForm) {
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const role = document.getElementById("role").value;
+    loginForm.addEventListener("submit", async function (event) {
 
-    const usernameError = document.getElementById("usernameError");
-    const passwordError = document.getElementById("passwordError");
-    const roleError = document.getElementById("roleError");
+        event.preventDefault();
 
-    usernameError.textContent = "";
-    passwordError.textContent = "";
-    roleError.textContent = "";
+        // ----------------------------------------------------
+        // Get form values
+        // ----------------------------------------------------
 
-    let valid = true;
+        const identifier = document
+            .getElementById("identifier")
+            .value
+            .trim();
 
-    if (username === "") {
-        usernameError.textContent = "Username is required";
-        valid = false;
-    }
+        const password = document
+            .getElementById("password")
+            .value;
 
-    if (password === "") {
-        passwordError.textContent = "Password is required";
-        valid = false;
-    }
+        // ----------------------------------------------------
+        // Basic validation
+        // ----------------------------------------------------
 
-    if (role === "") {
-        roleError.textContent = "Please select your role";
-        valid = false;
-    }
+        if (!identifier || !password) {
+            alert("Please enter Student ID/email and password.");
+            return;
+        }
 
-    if (!valid) {
-        return;
-    }
+        // ----------------------------------------------------
+        // Disable button while logging in
+        // ----------------------------------------------------
 
-    if (role === "student") {
-        window.location.href = "student-dashboard.html";
-    }
+        const loginButton = loginForm.querySelector(
+            'button[type="submit"]'
+        );
 
-    else if (role === "mentor") {
-        window.location.href = "mentor-dashboard.html";
-    }
-    else if (role === "faculty") {
-    window.location.href = "class-incharge-dashboard.html";
+        if (loginButton) {
+            loginButton.disabled = true;
+            loginButton.textContent = "Logging in...";
+        }
+
+        try {
+
+            // ------------------------------------------------
+            // Send login request to FastAPI
+            // ------------------------------------------------
+
+            const response = await fetch(
+                "http://127.0.0.1:8000/auth/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        identifier: identifier,
+                        password: password
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            // ------------------------------------------------
+            // Handle error
+            // ------------------------------------------------
+
+            if (!response.ok) {
+
+                alert(
+                    data.detail ||
+                    "Login failed. Please try again."
+                );
+
+                return;
+            }
+
+            // ------------------------------------------------
+            // Store JWT token
+            // ------------------------------------------------
+
+            localStorage.setItem(
+                "access_token",
+                data.access_token
+            );
+
+            localStorage.setItem(
+                "token_type",
+                data.token_type
+            );
+
+            // ------------------------------------------------
+            // Login successful
+            // ------------------------------------------------
+
+            alert("Login successful!");
+
+            window.location.href =
+                "student-dashboard.html";
+
+        } catch (error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+            alert(
+                "Cannot connect to the backend server. " +
+                "Please make sure FastAPI is running."
+            );
+
+        } finally {
+
+            if (loginButton) {
+                loginButton.disabled = false;
+                loginButton.textContent = "Login";
+            }
+        }
+    });
 }
-
-    else if (role === "hod") {
-        window.location.href = "hod-dashboard.html";
-    }
-
-    else if (role === "admin") {
-        window.location.href = "admin-dashboard.html";
-    }
-});

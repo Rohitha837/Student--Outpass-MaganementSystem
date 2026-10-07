@@ -1,3 +1,7 @@
+/* ================================
+   MY REQUESTS PAGE
+================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,33 +10,33 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #333;
+    background: #f4f6f9;
+    color: #222;
+    display: flex;
+    min-height: 100vh;
 }
 
-
-/* Sidebar */
+/* ================================
+   SIDEBAR
+================================ */
 
 .sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: #1f2937;
+    color: white;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     left: 0;
     top: 0;
-
-    width: 240px;
-    height: 100vh;
-
-    background: #1e3a8a;
-
-    padding: 25px 15px;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .sidebar h2 {
-    color: white;
     text-align: center;
     margin-bottom: 35px;
+    font-size: 24px;
 }
 
 .sidebar nav {
@@ -41,163 +45,173 @@ body {
     gap: 8px;
 }
 
-.sidebar nav a,
-.logout {
+.sidebar nav a {
     text-decoration: none;
-    color: white;
-
+    color: #d1d5db;
     padding: 13px 15px;
-
-    border-radius: 6px;
-
-    transition: 0.3s;
+    border-radius: 8px;
+    transition: 0.2s ease;
 }
 
-.sidebar nav a:hover,
-.sidebar nav a.active {
+.sidebar nav a:hover {
+    background: #374151;
+    color: white;
+}
+
+.sidebar nav a[href="my-requests.html"] {
     background: #2563eb;
+    color: white;
 }
 
 .logout {
     margin-top: auto;
-    background: #dc2626;
+    text-decoration: none;
     text-align: center;
+    background: #dc2626;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    transition: 0.2s ease;
 }
 
 .logout:hover {
     background: #b91c1c;
 }
 
-
-/* Main */
+/* ================================
+   MAIN CONTENT
+================================ */
 
 .main-content {
     margin-left: 240px;
+    width: calc(100% - 240px);
     padding: 35px;
 }
 
+/* ================================
+   HEADER
+================================ */
+
 .page-header {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .page-header h1 {
-    color: #1e3a8a;
+    font-size: 30px;
     margin-bottom: 6px;
 }
 
 .page-header p {
-    color: #666;
+    color: #6b7280;
+    font-size: 15px;
 }
-
-
-/* Apply Button */
 
 .apply-btn {
     text-decoration: none;
-
     background: #2563eb;
     color: white;
-
-    padding: 12px 18px;
-
-    border-radius: 6px;
-
-    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s ease;
 }
 
 .apply-btn:hover {
-    background: #1e3a8a;
+    background: #1d4ed8;
+    transform: translateY(-1px);
 }
 
-
-/* Filter */
+/* ================================
+   FILTER
+================================ */
 
 .filter-section {
     background: white;
-
     padding: 20px;
-
     border-radius: 10px;
-
     margin-bottom: 20px;
-
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .filter-section label {
-    font-weight: bold;
-
-    margin-right: 10px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .filter-section select {
-    padding: 9px 12px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 5px;
+    width: 220px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
 }
 
+.filter-section select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
 
-/* Table */
+/* ================================
+   REQUEST TABLE
+================================ */
 
 .requests-container {
     background: white;
-
     border-radius: 10px;
-
     overflow-x: auto;
-
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-table {
+.requests-container table {
     width: 100%;
-
     border-collapse: collapse;
-
-    min-width: 750px;
+    min-width: 850px;
 }
 
-th,
-td {
-    padding: 15px;
+.requests-container thead {
+    background: #f3f4f6;
+}
 
+.requests-container th {
     text-align: left;
-
-    border-bottom: 1px solid #eee;
-}
-
-th {
-    background: #eff6ff;
-
-    color: #1e3a8a;
-
+    padding: 16px;
     font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-td {
+.requests-container td {
+    padding: 16px;
     font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
 }
 
+.requests-container tbody tr {
+    transition: 0.2s ease;
+}
 
-/* Status */
+.requests-container tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ================================
+   STATUS
+================================ */
 
 .status {
     display: inline-block;
-
     padding: 6px 12px;
-
     border-radius: 20px;
-
     font-size: 12px;
-
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .status.pending {
@@ -215,16 +229,73 @@ td {
     color: #991b1b;
 }
 
+/* ================================
+   VIEW BUTTON
+================================ */
 
-/* Mobile */
+.view-btn {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
 
-@media (max-width: 700px) {
+.view-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.view-btn:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   NO DATA / LOADING
+================================ */
+
+.no-data {
+    text-align: center;
+    padding: 40px !important;
+    color: #6b7280;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        padding: 25px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    body {
+        display: block;
+    }
 
     .sidebar {
         position: relative;
-
         width: 100%;
-        height: auto;
+        min-height: auto;
     }
 
     .sidebar nav {
@@ -233,18 +304,22 @@ td {
     }
 
     .logout {
-        margin-top: 15px;
+        margin-top: 20px;
     }
 
     .main-content {
         margin-left: 0;
+        width: 100%;
         padding: 20px;
     }
 
     .page-header {
         flex-direction: column;
         align-items: flex-start;
+    }
 
-        gap: 15px;
+    .apply-btn {
+        width: 100%;
+        text-align: center;
     }
 }

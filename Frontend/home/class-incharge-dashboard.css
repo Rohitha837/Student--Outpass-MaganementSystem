@@ -287,7 +287,44 @@ td {
     background: #fee2e2;
     color: #b91c1c;
 }
+/* =========================
+   APPROVED STATUS
+========================= */
 
+.status.approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* =========================
+   REJECTED STATUS
+========================= */
+
+.status.rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================
+   DISABLED BUTTONS
+========================= */
+
+.view-btn:disabled,
+.approve-btn:disabled,
+.reject-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Keep disabled buttons visually inactive */
+
+.approve-btn:disabled:hover,
+.reject-btn:disabled:hover {
+    opacity: 0.5;
+}
 
 /* =========================
    BUTTONS

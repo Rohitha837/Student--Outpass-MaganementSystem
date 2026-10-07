@@ -13,16 +13,15 @@
 <body>
 
     <!-- Sidebar -->
-
     <aside class="sidebar">
 
         <h2>🎓 Outpass</h2>
 
         <nav>
-           <a href="student-dashboard.html">Dashboard</a>
-           <a href="apply-outpass.html">Apply Outpass</a>
-           <a href="my-requests.html">My Requests</a>
-           <a href="history.html">History</a>
+            <a href="student-dashboard.html">Dashboard</a>
+            <a href="apply-outpass.html">Apply Outpass</a>
+            <a href="my-requests.html">My Requests</a>
+            <a href="history.html">History</a>
         </nav>
 
         <a href="index.html" class="logout">Logout</a>
@@ -31,7 +30,6 @@
 
 
     <!-- Main Content -->
-
     <main class="main-content">
 
         <header class="page-header">
@@ -49,17 +47,18 @@
 
 
         <!-- Filter -->
-
         <section class="filter-section">
 
-            <label for="statusFilter">Filter by Status</label>
+            <label for="statusFilter">
+                Filter by Status
+            </label>
 
             <select id="statusFilter">
 
                 <option value="all">All Requests</option>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
 
             </select>
 
@@ -67,39 +66,43 @@
 
 
         <!-- Requests Table -->
-
         <section class="requests-container">
 
-            <section class="requests-container">
+            <table>
 
-    <table>
+                <thead>
 
-        <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Destination</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
 
-            <tr>
-                <th>Request ID</th>
-                <th>Destination</th>
-                <th>From Date</th>
-                <th>To Date</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+                </thead>
 
-        </thead>
+                <tbody id="requestsTable">
 
-        <tbody id="requestsTable">
-        </tbody>
+                    <tr>
+                        <td colspan="7">
+                            Loading requests...
+                        </td>
+                    </tr>
 
-    </table>
+                </tbody>
 
-</section>
+            </table>
 
         </section>
 
     </main>
-<script src="my-requests.js"></script>
-</body>
+
+
+    <script src="my-requests.js"></script>
+
 </body>
 
 </html>

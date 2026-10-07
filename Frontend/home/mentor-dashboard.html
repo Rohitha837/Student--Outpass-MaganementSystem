@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,132 +6,266 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mentor Dashboard</title>
+    <title>Mentor Dashboard | Student Outpass Management System</title>
 
     <link rel="stylesheet" href="mentor-dashboard.css">
 </head>
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Mentor navigation">
 
-        <h2>🎓 Outpass</h2>
+        <!-- Logo -->
+        <div class="logo">
+            <span aria-hidden="true">🎓</span>
+            <span>Outpass</span>
+        </div>
 
-        <nav>
-            <a href="mentor-dashboard.html" class="active">
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Main navigation">
+
+            <a href="mentor-dashboard.html"
+               class="active"
+               aria-current="page">
+                <span aria-hidden="true">🏠</span>
                 Dashboard
             </a>
 
-            <a href="#">
+            <a href="#pending">
+                <span aria-hidden="true">📋</span>
                 Pending Requests
             </a>
 
-            <a href="#">
+            <a href="#approved">
+                <span aria-hidden="true">✅</span>
                 Approved Requests
             </a>
 
-            <a href="history.html">
+            <a href="#history">
+                <span aria-hidden="true">📚</span>
                 History
             </a>
+
         </nav>
 
+
+        <!-- Logout -->
         <a href="index.html" class="logout">
+            <span aria-hidden="true">🚪</span>
             Logout
         </a>
 
     </aside>
 
 
-    <!-- Main Content -->
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
-    <main class="main-content">
+    <main class="main-content" id="main-content">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
 
         <header class="dashboard-header">
 
             <div>
                 <h1>Mentor Dashboard</h1>
-                <p>Welcome back, Mentor!</p>
+
+                <p>
+                    Review and manage student outpass requests.
+                </p>
             </div>
 
-            <div class="profile">
-                👤 Mentor
+
+            <!-- Mentor Profile -->
+
+            <div class="mentor-profile">
+
+                <div class="profile-icon" aria-hidden="true">
+                    👨‍🏫
+                </div>
+
+                <div>
+                    <strong>Mentor</strong>
+                    <span>Department Mentor</span>
+                </div>
+
             </div>
 
         </header>
 
 
-        <!-- Statistics -->
+        <!-- =========================
+             STATISTICS
+        ========================== -->
 
-        <section class="stats">
+        <section
+            class="stats-container"
+            aria-label="Request statistics">
 
-            <div class="stat-card">
-                <span>📋</span>
-                <h3>Total Requests</h3>
-                <strong>12</strong>
-            </div>
-
-            <div class="stat-card">
-                <span>⏳</span>
-                <h3>Pending</h3>
-                <strong>5</strong>
-            </div>
+            <!-- Total -->
 
             <div class="stat-card">
-                <span>✅</span>
-                <h3>Approved</h3>
-                <strong>6</strong>
-            </div>
 
-            <div class="stat-card">
-                <span>❌</span>
-                <h3>Rejected</h3>
-                <strong>1</strong>
-            </div>
-
-        </section>
-
-
-        <!-- Pending Requests -->
-
-        <section class="requests-section">
-
-            <div class="section-header">
+                <div class="stat-icon" aria-hidden="true">
+                    📋
+                </div>
 
                 <div>
-                    <h2>Pending Outpass Requests</h2>
-                    <p>Review requests submitted by students.</p>
+                    <h2>Total Requests</h2>
+                    <p>12</p>
                 </div>
 
             </div>
 
 
+            <!-- Pending -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon" aria-hidden="true">
+                    ⏳
+                </div>
+
+                <div>
+                    <h2>Pending</h2>
+                    <p>5</p>
+                </div>
+
+            </div>
+
+
+            <!-- Approved -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon" aria-hidden="true">
+                    ✅
+                </div>
+
+                <div>
+                    <h2>Approved</h2>
+                    <p>6</p>
+                </div>
+
+            </div>
+
+
+            <!-- Rejected -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon" aria-hidden="true">
+                    ❌
+                </div>
+
+                <div>
+                    <h2>Rejected</h2>
+                    <p>1</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PENDING REQUESTS
+        ========================== -->
+
+        <section
+            class="requests-section"
+            id="pending"
+            aria-labelledby="pending-title">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2 id="pending-title">
+                        Pending Outpass Requests
+                    </h2>
+
+                    <p>
+                        Review requests submitted by students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Request Table -->
+
             <div class="table-container">
 
                 <table>
 
+                    <caption>
+                        Student outpass requests awaiting mentor approval
+                    </caption>
+
+
                     <thead>
 
                         <tr>
-                            <th>Request ID</th>
-                            <th>Student</th>
-                            <th>Destination</th>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Action</th>
+
+                            <th scope="col">
+                                Request ID
+                            </th>
+
+                            <th scope="col">
+                                Student
+                            </th>
+
+                            <th scope="col">
+                                Destination
+                            </th>
+
+                            <th scope="col">
+                                Date
+                            </th>
+
+                            <th scope="col">
+                                Type
+                            </th>
+
+                            <th scope="col">
+                                Status
+                            </th>
+
+                            <th scope="col">
+                                Actions
+                            </th>
+
                         </tr>
 
                     </thead>
 
+
                     <tbody>
+
+                        <!-- =========================
+                             REQUEST 1
+                        ========================== -->
 
                         <tr>
 
-                            <td>#OUT004</td>
+                            <td>
+                                #OUT004
+                            </td>
 
                             <td>
-                                Rohit Kumar
+                                <strong>
+                                    Rohit Kumar
+                                </strong>
                             </td>
 
                             <td>
@@ -142,22 +277,37 @@
                             </td>
 
                             <td>
-                                <span class="normal-badge">
+
+                                <span class="type normal">
                                     Normal
                                 </span>
+
+                            </td>
+
+                            <td class="status">
+                                Pending
                             </td>
 
                             <td class="actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                    aria-label="View details for request OUT004">
                                     View
                                 </button>
 
-                                <button class="approve-btn">
+                                <button
+                                    type="button"
+                                    class="approve-btn"
+                                    aria-label="Approve request OUT004">
                                     Approve
                                 </button>
 
-                                <button class="reject-btn">
+                                <button
+                                    type="button"
+                                    class="reject-btn"
+                                    aria-label="Reject request OUT004">
                                     Reject
                                 </button>
 
@@ -166,12 +316,20 @@
                         </tr>
 
 
+                        <!-- =========================
+                             REQUEST 2
+                        ========================== -->
+
                         <tr>
 
-                            <td>#OUT005</td>
+                            <td>
+                                #OUT005
+                            </td>
 
                             <td>
-                                Priya S
+                                <strong>
+                                    Priya S
+                                </strong>
                             </td>
 
                             <td>
@@ -183,22 +341,37 @@
                             </td>
 
                             <td>
-                                <span class="normal-badge">
+
+                                <span class="type normal">
                                     Normal
                                 </span>
+
+                            </td>
+
+                            <td class="status">
+                                Pending
                             </td>
 
                             <td class="actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                    aria-label="View details for request OUT005">
                                     View
                                 </button>
 
-                                <button class="approve-btn">
+                                <button
+                                    type="button"
+                                    class="approve-btn"
+                                    aria-label="Approve request OUT005">
                                     Approve
                                 </button>
 
-                                <button class="reject-btn">
+                                <button
+                                    type="button"
+                                    class="reject-btn"
+                                    aria-label="Reject request OUT005">
                                     Reject
                                 </button>
 
@@ -207,12 +380,20 @@
                         </tr>
 
 
-                        <tr class="emergency-row">
+                        <!-- =========================
+                             REQUEST 3
+                        ========================== -->
 
-                            <td>#OUT006</td>
+                        <tr>
 
                             <td>
-                                Anjali R
+                                #OUT006
+                            </td>
+
+                            <td>
+                                <strong>
+                                    Anjali R
+                                </strong>
                             </td>
 
                             <td>
@@ -224,22 +405,37 @@
                             </td>
 
                             <td>
-                                <span class="emergency-badge">
-                                    🚨 Emergency
+
+                                <span class="type emergency">
+                                    Emergency
                                 </span>
+
+                            </td>
+
+                            <td class="status">
+                                Pending
                             </td>
 
                             <td class="actions">
 
-                                <button class="view-btn">
+                                <button
+                                    type="button"
+                                    class="view-btn"
+                                    aria-label="View details for request OUT006">
                                     View
                                 </button>
 
-                                <button class="approve-btn">
+                                <button
+                                    type="button"
+                                    class="approve-btn"
+                                    aria-label="Approve emergency request OUT006">
                                     Approve
                                 </button>
 
-                                <button class="reject-btn">
+                                <button
+                                    type="button"
+                                    class="reject-btn"
+                                    aria-label="Reject emergency request OUT006">
                                     Reject
                                 </button>
 
@@ -255,92 +451,308 @@
 
         </section>
 
-    </main>
-<!-- Request Details Modal -->
 
-<div id="requestModal" class="modal">
+        <!-- =========================
+             APPROVED REQUESTS
+        ========================== -->
 
-    <div class="modal-content">
+        <section
+            class="requests-section"
+            id="approved"
+            aria-labelledby="approved-title">
 
-        <div class="modal-header">
-            <h2>Outpass Request Details</h2>
+            <div class="section-header">
 
-            <button id="closeModal" class="close-btn">
-                &times;
-            </button>
-        </div>
+                <div>
 
+                    <h2 id="approved-title">
+                        Approved Requests
+                    </h2>
 
-        <div class="request-details">
+                    <p>
+                        Recently approved outpass requests.
+                    </p>
 
-            <div class="detail-item">
-                <strong>Request ID</strong>
-                <p id="detailId">#OUT004</p>
+                </div>
+
             </div>
 
-            <div class="detail-item">
-                <strong>Student Name</strong>
-                <p id="detailStudent">Rohit Kumar</p>
-            </div>
 
-            <div class="detail-item">
-                <strong>Destination</strong>
-                <p id="detailDestination">Chittoor</p>
-            </div>
+            <div class="empty-state">
 
-            <div class="detail-item">
-                <strong>From Date</strong>
-                <p id="detailFromDate">30-09-2026</p>
-            </div>
+                <div
+                    class="empty-icon"
+                    aria-hidden="true">
+                    ✅
+                </div>
 
-            <div class="detail-item">
-                <strong>To Date</strong>
-                <p id="detailToDate">30-09-2026</p>
-            </div>
+                <h3>
+                    Approved Requests
+                </h3>
 
-            <div class="detail-item">
-                <strong>Out Time</strong>
-                <p id="detailOutTime">10:00 AM</p>
-            </div>
-
-            <div class="detail-item">
-                <strong>Return Time</strong>
-                <p id="detailReturnTime">05:00 PM</p>
-            </div>
-
-            <div class="detail-item">
-                <strong>Request Type</strong>
-                <p id="detailType">Normal</p>
-            </div>
-
-            <div class="detail-item full-width">
-                <strong>Reason</strong>
-                <p id="detailReason">
-                    Personal work at Chittoor.
+                <p>
+                    Approved requests will appear here.
                 </p>
+
             </div>
 
-        </div>
+        </section>
 
 
-        <div class="modal-actions">
+        <!-- =========================
+             REQUEST HISTORY
+        ========================== -->
 
-            <button class="approve-btn">
-                Approve
-            </button>
+        <section
+            class="requests-section"
+            id="history"
+            aria-labelledby="history-title">
 
-            <button class="reject-btn">
-                Reject
-            </button>
+            <div class="section-header">
+
+                <div>
+
+                    <h2 id="history-title">
+                        Request History
+                    </h2>
+
+                    <p>
+                        Previously processed outpass requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-state">
+
+                <div
+                    class="empty-icon"
+                    aria-hidden="true">
+                    📚
+                </div>
+
+                <h3>
+                    No History Available
+                </h3>
+
+                <p>
+                    Processed requests will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         REQUEST DETAILS MODAL
+    ========================== -->
+
+    <div
+        class="modal"
+        id="requestModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="requestModalTitle"
+        aria-describedby="requestModalDescription">
+
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="requestModalTitle">
+                        Outpass Details
+                    </h2>
+
+                    <p id="requestModalDescription">
+                        Review complete request information before taking action.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="close-btn"
+                    id="closeModal"
+                    type="button"
+                    aria-label="Close outpass details">
+
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 REQUEST DETAILS
+            ========================== -->
+
+            <div class="request-details">
+
+                <div class="detail-item">
+
+                    <span>
+                        Request ID
+                    </span>
+
+                    <strong>
+                        #OUT004
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Student Name
+                    </span>
+
+                    <strong>
+                        Rohit Kumar
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Roll Number
+                    </span>
+
+                    <strong>
+                        22CSE001
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Destination
+                    </span>
+
+                    <strong>
+                        Chittoor
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        From Date
+                    </span>
+
+                    <strong>
+                        30-09-2026
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        To Date
+                    </span>
+
+                    <strong>
+                        30-09-2026
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Outpass Type
+                    </span>
+
+                    <strong>
+                        Normal
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        Reason
+                    </span>
+
+                    <strong>
+                        Personal work
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item full-width">
+
+                    <span>
+                        Student Contact
+                    </span>
+
+                    <strong>
+                        9876543210
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 MODAL ACTIONS
+            ========================== -->
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="approve-btn"
+                    aria-label="Approve this outpass request">
+                    Approve Request
+                </button>
+
+                <button
+                    type="button"
+                    class="reject-btn"
+                    aria-label="Reject this outpass request">
+                    Reject Request
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
-<script src="mentor.js"></script>
+    <script src="mentor.js"></script>
+
 </body>
 
 </html>
+```

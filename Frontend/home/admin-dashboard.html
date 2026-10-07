@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Admin Dashboard - Student Outpass Management System"
+    >
+
+    <title>Admin Dashboard | Outpass Management System</title>
+
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="admin-header">
+
+        <div class="header-brand">
+            <div class="brand-icon" aria-hidden="true">
+                🛡️
+            </div>
+
+            <div>
+                <h1>Student Outpass</h1>
+                <p>Admin Portal</p>
+            </div>
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="admin-info">
+                <strong>System Admin</strong>
+                <span>Administrator</span>
+            </div>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="dashboard-container">
+
+        <!-- Welcome -->
+
+        <section class="welcome-section">
+
+            <div>
+                <span class="page-label">
+                    ADMIN DASHBOARD
+                </span>
+
+                <h2>
+                    Welcome, System Admin
+                </h2>
+
+                <p>
+                    Manage student registrations and
+                    system approvals from here.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+
+        <section
+            class="stats-grid"
+            aria-label="Dashboard statistics"
+        >
+
+            <article class="stat-card">
+
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    <span>Total Students</span>
+                    <strong id="totalStudents">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card pending">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+                    <span>Pending Verification</span>
+                    <strong id="pendingStudents">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+
+            <article class="stat-card verified">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+                    <span>Verified Students</span>
+                    <strong id="verifiedStudents">
+                        0
+                    </strong>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- Pending Students -->
+
+        <section
+            class="students-section"
+            aria-labelledby="pending-title"
+        >
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">
+                        STUDENT MANAGEMENT
+                    </span>
+
+                    <h2 id="pending-title">
+                        Pending Student Verification
+                    </h2>
+
+                    <p>
+                        Review newly registered student
+                        accounts and verify them.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="refreshBtn"
+                    class="refresh-btn"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <div
+                id="loadingMessage"
+                class="message-box"
+                hidden
+            >
+                Loading student registrations...
+            </div>
+
+
+            <!-- Error -->
+
+            <div
+                id="errorMessage"
+                class="message-box error"
+                hidden
+            >
+                Unable to load student registrations.
+            </div>
+
+
+            <!-- Empty -->
+
+            <div
+                id="emptyMessage"
+                class="message-box"
+                hidden
+            >
+                No students are waiting for verification.
+            </div>
+
+
+            <!-- Table -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <caption class="sr-only">
+                        Students waiting for admin verification
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+                            <th scope="col">
+                                Student ID
+                            </th>
+
+                            <th scope="col">
+                                Name
+                            </th>
+
+                            <th scope="col">
+                                Email
+                            </th>
+
+                            <th scope="col">
+                                Department
+                            </th>
+
+                            <th scope="col">
+                                Year
+                            </th>
+
+                            <th scope="col">
+                                Section
+                            </th>
+
+                            <th scope="col">
+                                Phone
+                            </th>
+
+                            <th scope="col">
+                                Action
+                            </th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentsTableBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="admin-dashboard.js"></script>
+
+</body>
+
+</html>
