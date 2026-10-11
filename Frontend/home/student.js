@@ -1,153 +1,324 @@
+// ============================================================
+// STUDENT OUTPASS
+// ============================================================
+
+const API_URL = "http://127.0.0.1:8000";
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const outpassForm = document.getElementById("outpassForm");
 
     if (!outpassForm) {
-        console.error("outpassForm not found");
+        console.error("❌ outpassForm not found");
         return;
     }
 
-    outpassForm.addEventListener("submit", function (event) {
+    console.log("✅ Apply Outpass page loaded");
+
+
+    // --------------------------------------------------------
+    // Submit Form
+    // --------------------------------------------------------
+
+    outpassForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        const studentName = document.getElementById("studentName").value.trim();
-        const studentId = document.getElementById("studentId").value.trim();
-        const department = document.getElementById("department").value;
-        const year = document.getElementById("year").value;
-
-        const destination = document.getElementById("destination").value.trim();
-        const reason = document.getElementById("reason").value.trim();
-
-        const fromDate = document.getElementById("fromDate").value;
-        const toDate = document.getElementById("toDate").value;
-
-        const outTime = document.getElementById("outTime").value;
-        const returnTime = document.getElementById("returnTime").value;
-
-        const requestType = document.getElementById("requestType").value;
-
-        const remarks = document.getElementById("remarks").value.trim();
+        console.log("✅ Submit button clicked");
 
 
-        // Required fields validation
+        // ----------------------------------------------------
+        // Check login
+        // ----------------------------------------------------
+
+        const token = localStorage.getItem("access_token");
+
+        if (!token) {
+
+            alert("Please login first.");
+
+            window.location.href = "index.html";
+
+            return;
+        }
+
+
+        // ----------------------------------------------------
+        // Get values
+        // ----------------------------------------------------
+
+        const destination =
+            document.getElementById("destination").value.trim();
+
+        const reason =
+            document.getElementById("reason").value.trim();
+
+        const fromDate =
+            document.getElementById("fromDate").value;
+
+        const toDate =
+            document.getElementById("toDate").value;
+
+        const outTime =
+            document.getElementById("outTime").value;
+
+        const returnTime =
+            document.getElementById("returnTime").value;
+
+        const requestType =
+            document.getElementById("requestType").value;
+
+        const remarksElement =
+            document.getElementById("remarks");
+
+        const remarks =
+            remarksElement
+                ? remarksElement.value.trim()
+                : "";
+
+
+        // ----------------------------------------------------
+        // Validation
+        // ----------------------------------------------------
 
         if (
-            studentName === "" ||
-            studentId === "" ||
-            department === "" ||
-            year === "" ||
-            destination === "" ||
-            reason === "" ||
-            fromDate === "" ||
-            toDate === "" ||
-            outTime === "" ||
-            returnTime === "" ||
-            requestType === ""
+            !destination ||
+            !reason ||
+            !fromDate ||
+            !toDate ||
+            !outTime ||
+            !returnTime ||
+            !requestType
         ) {
+
             alert("Please fill all required fields.");
+
             return;
         }
 
-
-        // Date validation
 
         if (toDate < fromDate) {
-            alert("Return date cannot be before the outpass date.");
+
+            alert("To Date cannot be before From Date.");
+
             return;
         }
 
-
-        // Time validation
 
         if (
             fromDate === toDate &&
             returnTime <= outTime
         ) {
-            alert("Expected return time must be later than out time.");
+
+            alert(
+                "Expected Return Time must be later than Out Time."
+            );
+
             return;
         }
 
 
-        // Get existing requests
+        if (
+            requestType === "emergency" &&
+            !remarks
+        ) {
 
-        let requests = JSON.parse(
-            localStorage.getItem("outpassRequests")
-        ) || [];
+            alert(
+                "Please provide the emergency reason in Additional Remarks."
+            );
+
+            return;
+        }
 
 
-        // Create request ID
+        // ----------------------------------------------------
+        // Backend data
+        // ----------------------------------------------------
 
-        const requestId =
-            "OUT" + String(Date.now()).slice(-6);
-
-
-        // Create new request
-
-        const newRequest = {
-
-            id: requestId,
-
-            studentName: studentName,
-
-            studentId: studentId,
-
-            department: department,
-
-            year: year,
+        const outpassData = {
 
             destination: destination,
 
+            from_date: fromDate,
+
+            to_date: toDate,
+
+            out_time: outTime,
+
+            return_time: returnTime,
+
+            request_type: requestType,
+
             reason: reason,
 
-            fromDate: fromDate,
-
-            toDate: toDate,
-
-            outTime: outTime,
-
-            returnTime: returnTime,
-
-            requestType: requestType,
-
-            remarks: remarks,
-
-            status: "Pending",
-
-            submittedAt: new Date().toLocaleString()
+            emergency_reason:
+                requestType === "emergency"
+                    ? remarks
+                    : null
         };
 
 
-        // Add request
-
-        requests.push(newRequest);
-
-
-        // Save request
-
-        localStorage.setItem(
-            "outpassRequests",
-            JSON.stringify(requests)
+        console.log(
+            "📤 Sending outpass:",
+            outpassData
         );
 
 
-        // Success message
+        // ----------------------------------------------------
+        // Submit button
+        // ----------------------------------------------------
 
-        alert(
-            "Outpass request submitted successfully!\n\n" +
-            "Request ID: #" + requestId +
-            "\nStatus: Pending"
-        );
-
-
-        // Clear form
-
-        outpassForm.reset();
+        const submitButton =
+            outpassForm.querySelector(
+                'button[type="submit"]'
+            );
 
 
-        // Open My Requests
+        if (submitButton) {
 
-        window.location.href = "my-requests.html";
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Submitting...";
+        }
+
+
+        try {
+
+            // ------------------------------------------------
+            // POST request
+            // ------------------------------------------------
+
+            const response = await fetch(
+                `${API_URL}/outpasses/`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+
+                        "Authorization":
+                            `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify(outpassData)
+                }
+            );
+
+
+            console.log(
+                "📥 Response status:",
+                response.status
+            );
+
+
+            const data = await response.json();
+
+
+            console.log(
+                "📥 Backend response:",
+                data
+            );
+
+
+            // ------------------------------------------------
+            // Unauthorized
+            // ------------------------------------------------
+
+            if (response.status === 401) {
+
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("token_type");
+
+                alert(
+                    "Your login session has expired. Please login again."
+                );
+
+                window.location.href = "index.html";
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // Forbidden
+            // ------------------------------------------------
+
+            if (response.status === 403) {
+
+                alert(
+                    data.detail ||
+                    "You are not allowed to submit this outpass."
+                );
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // Other backend errors
+            // ------------------------------------------------
+
+            if (!response.ok) {
+
+                console.error(
+                    "❌ Backend error:",
+                    data
+                );
+
+                alert(
+                    data.detail ||
+                    "Unable to submit outpass request."
+                );
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // SUCCESS
+            // ------------------------------------------------
+
+            alert(
+                "Outpass request submitted successfully!\n\n" +
+                "Request ID: " +
+                data.request_id +
+                "\nStatus: " +
+                data.status
+            );
+
+
+            // Clear form
+            outpassForm.reset();
+
+
+            // Go to My Requests
+            window.location.href =
+                "my-requests.html";
+
+
+        } catch (error) {
+
+            console.error(
+                "❌ Outpass submission error:",
+                error
+            );
+
+            alert(
+                "Cannot connect to the backend server.\n\n" +
+                "Please make sure FastAPI is running."
+            );
+
+        } finally {
+
+            if (submitButton) {
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "Submit Outpass Request";
+            }
+        }
 
     });
 

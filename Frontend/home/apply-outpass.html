@@ -2,20 +2,15 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Apply Outpass | Student Outpass Management System</title>
 
     <link rel="stylesheet" href="apply-outpass.css">
-
 </head>
 
-
 <body>
-
 
     <!-- =========================
          SIDEBAR
@@ -23,96 +18,147 @@
 
     <aside class="sidebar">
 
-        <div class="logo">
-            🎓
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+
+            <div>
+                <h2>Outpass</h2>
+                <span>Management System</span>
+            </div>
         </div>
 
-        <h2>Outpass System</h2>
+        <nav class="sidebar-nav" aria-label="Main navigation">
 
-
-        <nav>
-
-            <a href="student-dashboard.html">
-                🏠 Dashboard
+            <a href="student-dashboard.html" class="nav-item">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
             </a>
 
-
-            <a href="apply-outpass.html" class="active">
-                📝 Apply Outpass
+            <a href="apply-outpass.html" class="nav-item active">
+                <span class="nav-icon">📝</span>
+                <span>Apply Outpass</span>
             </a>
 
-
-            <a href="my-requests.html">
-                📋 My Requests
+            <a href="my-requests.html" class="nav-item">
+                <span class="nav-icon">📋</span>
+                <span>My Requests</span>
             </a>
 
-
-            <a href="history.html">
-                📜 History
-            </a>
-
-
-            <a href="index.html" class="logout">
-                🚪 Logout
+            <a href="history.html" class="nav-item">
+                <span class="nav-icon">🕘</span>
+                <span>History</span>
             </a>
 
         </nav>
 
+        <div class="sidebar-bottom">
+
+            <a href="index.html" class="logout-link">
+                <span>↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
     </aside>
 
 
-
     <!-- =========================
-         MAIN CONTENT
+         MAIN
     ========================== -->
 
     <main class="main-content">
 
-
-        <!-- Header -->
+        <!-- Topbar -->
 
         <header class="topbar">
 
-            <div>
+            <div class="page-heading">
 
-                <h1>Apply Outpass</h1>
+                <div class="breadcrumb">
+                    Student Portal <span>/</span> Apply Outpass
+                </div>
+
+                <h1>Apply for Outpass</h1>
 
                 <p>
-                    Submit a new outpass request.
+                    Submit your outpass request with the required details.
                 </p>
 
             </div>
 
+            <div class="profile-card">
 
-            <div class="profile">
+                <div class="profile-avatar">
+                    S
+                </div>
 
-                👤 Student
+                <div class="profile-info">
+                    <strong>Student</strong>
+                    <span>Outpass Portal</span>
+                </div>
 
             </div>
 
         </header>
 
 
-
         <!-- =========================
-             OUTPASS FORM
+             PAGE CONTENT
         ========================== -->
 
-        <section class="form-container">
+        <section class="page-content">
+
+            <!-- Page Intro -->
+
+            <div class="intro-card">
+
+                <div class="intro-icon">
+                    📝
+                </div>
+
+                <div>
+                    <h2>New Outpass Request</h2>
+
+                    <p>
+                        Fill in the details below and submit your request
+                        for approval.
+                    </p>
+                </div>
+
+            </div>
 
 
-            <form id="outpassForm">
+            <!-- =========================
+                 FORM
+            ========================== -->
+
+            <form id="outpassForm" class="outpass-form">
+
+                <!-- =====================
+                     SECTION 1
+                ====================== -->
+
+                <section class="form-card">
+
+                    <div class="section-header">
+
+                        <div class="section-number">
+                            01
+                        </div>
+
+                        <div>
+                            <h2>Student Information</h2>
+
+                            <p>
+                                Verify your basic student details.
+                            </p>
+                        </div>
+
+                    </div>
 
 
-                <!-- Student Information -->
-
-                <div class="form-section">
-
-                    <h2>Student Information</h2>
-
-
-                    <div class="form-row">
-
+                    <div class="form-grid">
 
                         <div class="form-group">
 
@@ -123,12 +169,12 @@
                             <input
                                 type="text"
                                 id="studentName"
-                                placeholder="Enter student name"
+                                placeholder="Enter your name"
+                                autocomplete="name"
                                 required
                             >
 
                         </div>
-
 
 
                         <div class="form-group">
@@ -141,17 +187,11 @@
                                 type="text"
                                 id="studentId"
                                 placeholder="Enter student ID"
+                                autocomplete="off"
                                 required
                             >
 
                         </div>
-
-
-                    </div>
-
-
-
-                    <div class="form-row">
 
 
                         <div class="form-group">
@@ -160,12 +200,11 @@
                                 Department
                             </label>
 
-                            <select
-                                id="department"
-                                required
-                            >
+                            <select id="department" required>
 
-                
+                                <option value="">
+                                    Select department
+                                </option>
 
                                 <option value="CSE">
                                     Computer Science & Engineering
@@ -192,18 +231,17 @@
                         </div>
 
 
-
                         <div class="form-group">
 
                             <label for="year">
                                 Year
                             </label>
 
-                            <select
-                                id="year"
-                                required
-                            >
+                            <select id="year" required>
 
+                                <option value="">
+                                    Select year
+                                </option>
 
                                 <option value="1">
                                     1st Year
@@ -225,61 +263,108 @@
 
                         </div>
 
-
                     </div>
 
-                </div>
+                </section>
 
 
+                <!-- =====================
+                     SECTION 2
+                ====================== -->
 
-                <!-- Outpass Details -->
+                <section class="form-card">
 
-                <div class="form-section">
+                    <div class="section-header">
 
-                    <h2>Outpass Details</h2>
+                        <div class="section-number">
+                            02
+                        </div>
 
+                        <div>
+                            <h2>Outpass Details</h2>
 
-                    <div class="form-group">
-
-                        <label for="destination">
-                            Destination
-                        </label>
-
-                        <input
-                            type="text"
-                            id="destination"
-                            placeholder="Enter destination"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="reason">
-                            Reason for Outpass
-                        </label>
-
-                        <textarea
-                            id="reason"
-                            rows="4"
-                            placeholder="Enter reason for requesting outpass"
-                            required
-                        ></textarea>
+                            <p>
+                                Provide the destination and reason for your visit.
+                            </p>
+                        </div>
 
                     </div>
 
 
+                    <div class="form-grid single">
 
-                    <div class="form-row">
+                        <div class="form-group">
 
+                            <label for="destination">
+                                Destination
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="destination"
+                                placeholder="Example: Chittoor, Tirupati"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="reason">
+                                Reason for Outpass
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                id="reason"
+                                rows="4"
+                                placeholder="Explain why you need the outpass..."
+                                required
+                            ></textarea>
+
+                            <small>
+                                Please provide a clear and genuine reason.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================
+                     SECTION 3
+                ====================== -->
+
+                <section class="form-card">
+
+                    <div class="section-header">
+
+                        <div class="section-number">
+                            03
+                        </div>
+
+                        <div>
+                            <h2>Travel Schedule</h2>
+
+                            <p>
+                                Specify when you will leave and return.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
 
                         <div class="form-group">
 
                             <label for="fromDate">
                                 From Date
+                                <span class="required">*</span>
                             </label>
 
                             <input
@@ -291,11 +376,11 @@
                         </div>
 
 
-
                         <div class="form-group">
 
                             <label for="toDate">
                                 To Date
+                                <span class="required">*</span>
                             </label>
 
                             <input
@@ -307,17 +392,11 @@
                         </div>
 
 
-                    </div>
-
-
-
-                    <div class="form-row">
-
-
                         <div class="form-group">
 
                             <label for="outTime">
                                 Out Time
+                                <span class="required">*</span>
                             </label>
 
                             <input
@@ -329,11 +408,11 @@
                         </div>
 
 
-
                         <div class="form-group">
 
                             <label for="returnTime">
                                 Expected Return Time
+                                <span class="required">*</span>
                             </label>
 
                             <input
@@ -344,46 +423,127 @@
 
                         </div>
 
+                    </div>
+
+
+                    <div class="schedule-note">
+
+                        <span>💡</span>
+
+                        <p>
+                            Make sure the return time is later than the
+                            out time when both dates are the same.
+                        </p>
 
                     </div>
 
-                </div>
+                </section>
 
 
+                <!-- =====================
+                     SECTION 4
+                ====================== -->
 
-                <!-- Request Type -->
+                <section class="form-card">
 
-                <div class="form-section">
+                    <div class="section-header">
 
-                    <h2>Request Type</h2>
+                        <div class="section-number">
+                            04
+                        </div>
+
+                        <div>
+                            <h2>Request Type</h2>
+
+                            <p>
+                                Select the type of outpass you are requesting.
+                            </p>
+                        </div>
+
+                    </div>
 
 
-                    <div class="form-group">
+                    <div class="request-type-grid">
 
-                        <label for="requestType">
-                            Outpass Type
+                        <label class="request-option">
+
+                            <input
+                                type="radio"
+                                name="requestTypeOption"
+                                value="normal"
+                                checked
+                            >
+
+                            <span class="option-content">
+
+                                <span class="option-icon normal">
+                                    📋
+                                </span>
+
+                                <span>
+                                    <strong>Normal Outpass</strong>
+
+                                    <small>
+                                        Regular outpass request
+                                    </small>
+                                </span>
+
+                            </span>
+
                         </label>
 
-                        <select
-                            id="requestType"
-                            required
-                        >
 
-                            <option value="normal">
-                                Normal Outpass
-                            </option>
+                        <label class="request-option emergency-option">
 
-                            <option value="emergency">
-                                Emergency Outpass
-                            </option>
+                            <input
+                                type="radio"
+                                name="requestTypeOption"
+                                value="emergency"
+                            >
 
-                        </select>
+                            <span class="option-content">
+
+                                <span class="option-icon emergency">
+                                    🚨
+                                </span>
+
+                                <span>
+                                    <strong>Emergency Outpass</strong>
+
+                                    <small>
+                                        Use only for urgent situations
+                                    </small>
+                                </span>
+
+                            </span>
+
+                        </label>
 
                     </div>
 
 
+                    <!-- Hidden select retained for JavaScript compatibility -->
 
-                    <div class="form-group">
+                    <select
+                        id="requestType"
+                        class="hidden-select"
+                        aria-hidden="true"
+                        tabindex="-1"
+                        required
+                    >
+
+                        <option value="normal" selected>
+                            Normal Outpass
+                        </option>
+
+                        <option value="emergency">
+                            Emergency Outpass
+                        </option>
+
+                    </select>
+
+
+                    <div class="form-group remarks-group">
 
                         <label for="remarks">
                             Additional Remarks
@@ -391,55 +551,57 @@
 
                         <textarea
                             id="remarks"
-                            rows="3"
-                            placeholder="Enter any additional information..."
+                            rows="4"
+                            placeholder="Add any additional information..."
                         ></textarea>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================
+                     IMPORTANT INFO
+                ====================== -->
+
+                <div class="important-box">
+
+                    <div class="important-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>Before you submit</h3>
+
+                        <ul>
+
+                            <li>
+                                Check all dates and timings carefully.
+                            </li>
+
+                            <li>
+                                Your request will be sent through the
+                                approval process.
+                            </li>
+
+                            <li>
+                                Emergency requests should be used only
+                                when genuinely required.
+                            </li>
+
+                        </ul>
 
                     </div>
 
                 </div>
 
 
-
-                <!-- Important Information -->
-
-                <div class="info-box">
-
-                    <h3>📌 Important</h3>
-
-                    <ul>
-
-                        <li>
-                            Make sure all details are correct before submitting.
-                        </li>
-
-                        <li>
-                            Your request will be sent for approval.
-                        </li>
-
-                        <li>
-                            Emergency requests should be used only when necessary.
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <!-- Form Buttons -->
+                <!-- =====================
+                     ACTIONS
+                ====================== -->
 
                 <div class="form-actions">
-
-
-                    <button
-                        type="submit"
-                        class="submit-btn"
-                    >
-                        Submit Outpass Request
-                    </button>
-
-
 
                     <button
                         type="reset"
@@ -448,23 +610,72 @@
                         Clear Form
                     </button>
 
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+                        <span>Submit Outpass Request</span>
+                        <span class="arrow">→</span>
+                    </button>
 
                 </div>
-
 
             </form>
 
         </section>
 
-
     </main>
 
 
+    <script>
 
-    <!-- JavaScript -->
+        /*
+         * Keep the hidden backend-compatible requestType
+         * synchronized with the visual radio buttons.
+         */
+
+        const requestTypeOptions =
+            document.querySelectorAll(
+                'input[name="requestTypeOption"]'
+            );
+
+        const requestType =
+            document.getElementById("requestType");
+
+
+        requestTypeOptions.forEach(function (option) {
+
+            option.addEventListener("change", function () {
+
+                requestType.value = this.value;
+
+            });
+
+        });
+
+
+        /*
+         * Logout
+         */
+
+        const logoutLink =
+            document.querySelector(".logout-link");
+
+        if (logoutLink) {
+
+            logoutLink.addEventListener("click", function () {
+
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("token_type");
+
+            });
+
+        }
+
+    </script>
+
 
     <script src="student.js"></script>
-
 
 </body>
 

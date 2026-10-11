@@ -16,10 +16,7 @@
 
     <title>Student Sign Up | Outpass Management System</title>
 
-    <link
-        rel="stylesheet"
-        href="signup.css"
-    >
+    <link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
@@ -41,13 +38,9 @@
                     🎓
                 </div>
 
-                <h1>
-                    Student Outpass
-                </h1>
+                <h1>Student Outpass</h1>
 
-                <p>
-                    Management System
-                </p>
+                <p>Management System</p>
 
             </div>
 
@@ -91,7 +84,7 @@
                 </div>
 
 
-                <!-- Name -->
+                <!-- Full Name -->
                 <div class="form-group">
 
                     <label for="name">
@@ -129,22 +122,55 @@
                 </div>
 
 
-                <!-- Department -->
+                <!-- Department + Year -->
                 <div class="form-row">
 
+                    <!-- Department -->
                     <div class="form-group">
 
                         <label for="department">
                             Department
                         </label>
 
-                        <input
-                            type="text"
+                        <select
                             id="department"
                             name="department"
-                            placeholder="CSE"
                             required
                         >
+
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
+                                Select Department
+                            </option>
+
+                            <option value="CSE">
+                                Computer Science & Engineering
+                            </option>
+
+                            <option value="ECE">
+                                Electronics & Communication Engineering
+                            </option>
+
+                            <option value="EEE">
+                                Electrical & Electronics Engineering
+                            </option>
+
+                            <option value="ME">
+                                Mechanical Engineering
+                            </option>
+
+                            <option value="CIVIL">
+                                Civil Engineering
+                            </option>
+
+                            <option value="AI&DS">
+                                Artificial Intelligence & Data Science
+                            </option>
+
+                        </select>
 
                     </div>
 
@@ -162,7 +188,11 @@
                             required
                         >
 
-                            <option value="">
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
                                 Select Year
                             </option>
 
@@ -192,23 +222,38 @@
                 <!-- Section + Phone -->
                 <div class="form-row">
 
+                    <!-- Section -->
                     <div class="form-group">
 
-                        <label for="section">
-                            Section
-                        </label>
+    <label for="section">
+        Section
+    </label>
 
-                        <input
-                            type="text"
-                            id="section"
-                            name="section"
-                            placeholder="A"
-                            required
-                        >
+    <select
+        id="section"
+        name="section"
+        required
+    >
 
-                    </div>
+        <option
+            value=""
+            disabled
+            selected
+        >
+            Select Section
+        </option>
+
+        <option value="A">Section A</option>
+        <option value="B">Section B</option>
+        <option value="C">Section C</option>
+        <option value="D">Section D</option>
+
+    </select>
+
+</div>
 
 
+                    <!-- Phone -->
                     <div class="form-group">
 
                         <label for="phone_number">
@@ -222,6 +267,7 @@
                             placeholder="10-digit number"
                             autocomplete="tel"
                             maxlength="15"
+                            inputmode="numeric"
                             required
                         >
 
@@ -250,6 +296,26 @@
                     <small>
                         Use at least 8 characters.
                     </small>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
 
                 </div>
 

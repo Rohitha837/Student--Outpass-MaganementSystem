@@ -2,6 +2,8 @@
 // STUDENT SIGN UP
 // ============================================================
 
+const API_URL = "http://127.0.0.1:8000";
+
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
@@ -9,6 +11,10 @@ if (signupForm) {
     signupForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
+
+        // ----------------------------------------------------
+        // Get form values
+        // ----------------------------------------------------
 
         const studentId =
             document.getElementById("student_id").value.trim();
@@ -19,11 +25,8 @@ if (signupForm) {
         const email =
             document.getElementById("email").value.trim();
 
-        const password =
-            document.getElementById("password").value;
-
         const department =
-            document.getElementById("department").value.trim();
+            document.getElementById("department").value;
 
         const year =
             Number(document.getElementById("year").value);
@@ -34,10 +37,14 @@ if (signupForm) {
         const phoneNumber =
             document.getElementById("phone_number").value.trim();
 
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirm_password").value;
+
         const signupButton =
-            signupForm.querySelector(
-                'button[type="submit"]'
-            );
+            signupForm.querySelector('button[type="submit"]');
 
 
         // ----------------------------------------------------
@@ -48,19 +55,42 @@ if (signupForm) {
             !studentId ||
             !name ||
             !email ||
-            !password ||
             !department ||
             !year ||
             !section ||
-            !phoneNumber
+            !phoneNumber ||
+            !password ||
+            !confirmPassword
         ) {
             alert("Please fill in all fields.");
             return;
         }
 
 
+        // ----------------------------------------------------
+        // Password validation
+        // ----------------------------------------------------
+
         if (password.length < 8) {
             alert("Password must contain at least 8 characters.");
+            return;
+        }
+
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+
+        // ----------------------------------------------------
+        // Phone validation
+        // ----------------------------------------------------
+
+        const phonePattern = /^[0-9]{10,15}$/;
+
+        if (!phonePattern.test(phoneNumber)) {
+            alert("Please enter a valid phone number.");
             return;
         }
 
@@ -70,15 +100,17 @@ if (signupForm) {
         // ----------------------------------------------------
 
         signupButton.disabled = true;
-
-        signupButton.textContent =
-            "Creating Account...";
+        signupButton.textContent = "Creating Account...";
 
 
         try {
 
+            // ------------------------------------------------
+            // Send registration request
+            // ------------------------------------------------
+
             const response = await fetch(
-                "http://127.0.0.1:8000/auth/register",
+                `${API_URL}/auth/register`,
                 {
                     method: "POST",
 
@@ -104,36 +136,37 @@ if (signupForm) {
 
 
             // ------------------------------------------------
-            // Handle error
+            // Handle backend errors
             // ------------------------------------------------
 
-            
             if (!response.ok) {
-               let errorMessage = "Registration failed. Please try again.";
 
-             if (typeof data.detail === "string") {
-                 errorMessage = data.detail;
-            } else if (Array.isArray(data.detail)) {
-              errorMessage = data.detail
-            .map(error => {
-                if (typeof error === "string") {
-                    return error;
+                let errorMessage =
+                    "Registration failed. Please try again.";
+
+                if (typeof data.detail === "string") {
+
+                    errorMessage = data.detail;
+
+                } else if (Array.isArray(data.detail)) {
+
+                    errorMessage = data.detail
+                        .map(error => {
+
+                            if (typeof error === "string") {
+                                return error;
+                            }
+
+                            return error.msg || JSON.stringify(error);
+
+                        })
+                        .join("\n");
                 }
 
-                if (error.msg) {
-                    return error.msg;
-                }
+                alert(errorMessage);
+                return;
+            }
 
-                return JSON.stringify(error);
-            })
-            .join("\n");
-    } else if (data.detail) {
-        errorMessage = JSON.stringify(data.detail, null, 2);
-    }
-
-    alert(errorMessage);
-    return;
-}
 
             // ------------------------------------------------
             // Registration successful
@@ -141,11 +174,15 @@ if (signupForm) {
 
             alert(
                 "Account created successfully!\n\n" +
-                "Your account is waiting for verification."
+                "Your account is waiting for Admin verification.\n\n" +
+                "After verification, you can login."
             );
 
 
-            // Go to login
+            // ------------------------------------------------
+            // Go to login page
+            // ------------------------------------------------
+
             window.location.href = "index.html";
 
 
@@ -161,14 +198,13 @@ if (signupForm) {
                 "Please make sure FastAPI is running."
             );
 
-
         } finally {
 
             signupButton.disabled = false;
+            signupButton.textContent = "Create Account";
 
-            signupButton.textContent =
-                "Create Account";
         }
 
     });
+
 }

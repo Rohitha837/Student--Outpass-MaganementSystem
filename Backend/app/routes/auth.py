@@ -189,3 +189,50 @@ def login_admin(
         "access_token": access_token,
         "token_type": "bearer"
     }
+@router.post("/mentor-login", response_model=TokenResponse)
+def login_mentor(
+    login_data: StudentLogin,
+    db: Session = Depends(get_db)
+):
+    mentor = db.query(User).filter(
+        User.email == login_data.identifier
+    ).first()
+
+    if not mentor:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid mentor email or password"
+        )
+
+    if mentor.role != "Mentor":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This account is not a Mentor account"
+        )
+
+    if not verify_password(login_data.password, mentor.password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid mentor email or password"
+        )
+
+    if not mentor.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Mentor account is inactive"
+        )
+
+    access_token = create_access_token(
+        data={
+            "sub": str(mentor.id),
+            "role": mentor.role
+        },
+        expires_delta=timedelta(
+            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
+        )
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer"
+    }

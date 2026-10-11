@@ -439,3 +439,22 @@ select:focus-visible {
     }
 
 }
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select:invalid {
+    color: #94a3b8;
+}
+
+.form-group select option {
+    color: var(--text);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+}
+
+.form-group input:valid:not(:placeholder-shown) {
+    border-color: #22c55e;
+}

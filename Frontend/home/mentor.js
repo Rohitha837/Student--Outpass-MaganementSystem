@@ -1,324 +1,299 @@
-```javascript
-// ========================================
-// MENTOR DASHBOARD
-// ========================================
+const API_URL = "http://127.0.0.1:8000";
 
-// Main request modal
-const requestModal = document.getElementById("requestModal");
-const closeModal = document.getElementById("closeModal");
+let mentorRequests = [];
 
-// Request buttons
-const viewButtons = document.querySelectorAll(".view-btn");
-const approveButtons = document.querySelectorAll(".approve-btn");
-const rejectButtons = document.querySelectorAll(".reject-btn");
+document.addEventListener("DOMContentLoaded", () => {
+    loadMentorRequests();
+});
 
 
-// ========================================
-// REQUEST DATA
-// ========================================
+async function loadMentorRequests() {
 
-const requestDetails = {
+    const token = localStorage.getItem("access_token");
 
-    OUT004: {
-        id: "#OUT004",
-        student: "Rohit Kumar",
-        rollNumber: "22CSE001",
-        destination: "Chittoor",
-        fromDate: "30-09-2026",
-        toDate: "30-09-2026",
-        type: "Normal",
-        reason: "Personal work",
-        contact: "9876543210"
-    },
-
-    OUT005: {
-        id: "#OUT005",
-        student: "Priya S",
-        rollNumber: "22CSE002",
-        destination: "Tirupati",
-        fromDate: "01-10-2026",
-        toDate: "01-10-2026",
-        type: "Normal",
-        reason: "Family function",
-        contact: "9876543211"
-    },
-
-    OUT006: {
-        id: "#OUT006",
-        student: "Anjali R",
-        rollNumber: "22CSE003",
-        destination: "Home",
-        fromDate: "30-09-2026",
-        toDate: "30-09-2026",
-        type: "Emergency",
-        reason: "Medical emergency",
-        contact: "9876543212"
+    if (!token) {
+        alert("Please login first.");
+        window.location.href = "index.html";
+        return;
     }
 
-};
+    const tableBody =
+        document.getElementById("requestsTable") ||
+        document.querySelector("#requestsTable tbody") ||
+        document.querySelector("tbody");
 
+    if (!tableBody) {
+        console.error("Requests table body not found.");
+        return;
+    }
 
-// ========================================
-// STATISTICS
-// ========================================
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="10">Loading requests...</td>
+        </tr>
+    `;
 
-const statCards = document.querySelectorAll(".stat-card");
+    try {
 
-const totalElement = statCards[0]?.querySelector("p");
-const pendingElement = statCards[1]?.querySelector("p");
-const approvedElement = statCards[2]?.querySelector("p");
-const rejectedElement = statCards[3]?.querySelector("p");
+        const response = await fetch(`${API_URL}/mentor/requests`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
+        const data = await response.json();
 
-// ========================================
-// UPDATE STATISTICS
-// ========================================
+        console.log("Mentor requests:", data);
 
-function updateStatistics() {
+        if (response.status === 401) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("token_type");
 
-    const rows = document.querySelectorAll(
-        ".requests-section#pending tbody tr"
-    );
-
-    let pending = 0;
-    let approved = 0;
-    let rejected = 0;
-
-    rows.forEach(function (row) {
-
-        const status = row
-            .querySelector(".status")
-            ?.textContent
-            .trim();
-
-        if (status === "Pending") {
-            pending++;
+            alert("Session expired. Please login again.");
+            window.location.href = "index.html";
+            return;
         }
 
-        if (status === "Approved") {
-            approved++;
+        if (!response.ok) {
+            throw new Error(
+                data.detail || "Unable to load mentor requests."
+            );
         }
 
-        if (status === "Rejected") {
-            rejected++;
-        }
+        mentorRequests = data;
 
-    });
+        displayRequests(tableBody);
 
+    } catch (error) {
 
-    if (pendingElement) {
-        pendingElement.textContent = pending;
+        console.error("Mentor request error:", error);
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="10">
+                    Unable to load requests.
+                </td>
+            </tr>
+        `;
     }
-
-    if (approvedElement) {
-        approvedElement.textContent = approved;
-    }
-
-    if (rejectedElement) {
-        rejectedElement.textContent = rejected;
-    }
-
 }
 
 
-// ========================================
-// VIEW REQUEST
-// ========================================
+function displayRequests(tableBody) {
 
-viewButtons.forEach(function (button) {
+    if (!mentorRequests.length) {
 
-    button.addEventListener("click", function () {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="10">
+                    No pending outpass requests.
+                </td>
+            </tr>
+        `;
 
-        const row = button.closest("tr");
-
-        const requestId = row
-            .querySelector("td")
-            .textContent
-            .trim()
-            .replace("#", "");
-
-        const request = requestDetails[requestId];
-
-        if (!request) {
-            return;
-        }
-
-
-        const details = document.querySelectorAll(
-            ".request-details .detail-item strong"
-        );
-
-
-        details[0].textContent = request.id;
-        details[1].textContent = request.student;
-        details[2].textContent = request.rollNumber;
-        details[3].textContent = request.destination;
-        details[4].textContent = request.fromDate;
-        details[5].textContent = request.toDate;
-        details[6].textContent = request.type;
-        details[7].textContent = request.reason;
-        details[8].textContent = request.contact;
-
-
-        requestModal.style.display = "flex";
-
-    });
-
-});
-
-
-// ========================================
-// CLOSE REQUEST MODAL
-// ========================================
-
-closeModal.addEventListener("click", function () {
-
-    requestModal.style.display = "none";
-
-});
-
-
-window.addEventListener("click", function (event) {
-
-    if (event.target === requestModal) {
-
-        requestModal.style.display = "none";
-
+        return;
     }
 
-});
+    tableBody.innerHTML = "";
+
+    mentorRequests.forEach(request => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${request.request_id}</td>
+
+            <td>${request.student_id}</td>
+
+            <td>${request.destination}</td>
+
+            <td>${request.from_date}</td>
+
+            <td>${request.to_date}</td>
+
+            <td>${request.out_time}</td>
+
+            <td>${request.return_time}</td>
+
+            <td>${request.request_type}</td>
+
+            <td>
+                <button
+                    type="button"
+                    class="view-btn"
+                    onclick="viewRequest(${request.id})">
+                    View
+                </button>
+
+                <button
+                    type="button"
+                    class="approve-btn"
+                    onclick="approveRequest(${request.id})">
+                    Approve
+                </button>
+
+                <button
+                    type="button"
+                    class="reject-btn"
+                    onclick="rejectRequest(${request.id})">
+                    Reject
+                </button>
+            </td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
 
 
-// ========================================
-// APPROVE REQUEST
-// ========================================
+function viewRequest(requestId) {
 
-approveButtons.forEach(function (button) {
+    const request = mentorRequests.find(
+        item => item.id === requestId
+    );
 
-    button.addEventListener("click", function () {
+    if (!request) {
+        alert("Request not found.");
+        return;
+    }
 
-        const row = button.closest("tr");
-
-        const statusCell = row.querySelector(".status");
-
-        if (!statusCell) {
-            return;
-        }
-
-
-        // Prevent duplicate action
-        if (statusCell.textContent.trim() !== "Pending") {
-            return;
-        }
-
-
-        const studentName = row
-            .querySelector("td:nth-child(2)")
-            .textContent
-            .trim();
+    alert(
+        "OUTPASS DETAILS\n\n" +
+        "Request ID: " + request.request_id +
+        "\nStudent ID: " + request.student_id +
+        "\nDestination: " + request.destination +
+        "\nFrom Date: " + request.from_date +
+        "\nTo Date: " + request.to_date +
+        "\nOut Time: " + request.out_time +
+        "\nReturn Time: " + request.return_time +
+        "\nRequest Type: " + request.request_type +
+        "\nReason: " + request.reason +
+        "\nStatus: " + request.status
+    );
+}
 
 
-        const confirmed = confirm(
-            `Approve outpass request for ${studentName}?`
+async function approveRequest(requestId) {
+
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+        alert("Please login first.");
+        window.location.href = "index.html";
+        return;
+    }
+
+    const confirmed = confirm(
+        "Are you sure you want to approve this outpass?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/mentor/requests/${requestId}/approve`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
         );
 
+        const data = await response.json();
 
-        if (!confirmed) {
+        console.log("Approve response:", data);
+
+        if (!response.ok) {
+            alert(data.detail || "Unable to approve request.");
             return;
         }
 
-
-        // Update status
-        statusCell.textContent = "Approved";
-
-        statusCell.className = "status approved";
-
-
-        // Disable approve/reject buttons
-        const approveButton = row.querySelector(".approve-btn");
-        const rejectButton = row.querySelector(".reject-btn");
-
-        approveButton.disabled = true;
-        rejectButton.disabled = true;
-
-
-        // Update statistics
-        updateStatistics();
-
-
-        alert("Outpass request approved successfully.");
-
-    });
-
-});
-
-
-// ========================================
-// REJECT REQUEST
-// ========================================
-
-rejectButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        const row = button.closest("tr");
-
-        const statusCell = row.querySelector(".status");
-
-        if (!statusCell) {
-            return;
-        }
-
-
-        // Prevent duplicate action
-        if (statusCell.textContent.trim() !== "Pending") {
-            return;
-        }
-
-
-        const studentName = row
-            .querySelector("td:nth-child(2)")
-            .textContent
-            .trim();
-
-
-        const confirmed = confirm(
-            `Reject outpass request for ${studentName}?`
+        alert(
+            "Outpass approved successfully!\n\n" +
+            "Request ID: " + data.request_id
         );
 
+        loadMentorRequests();
 
-        if (!confirmed) {
+    } catch (error) {
+
+        console.error("Approve error:", error);
+
+        alert(
+            "Cannot connect to backend server."
+        );
+    }
+}
+
+
+async function rejectRequest(requestId) {
+
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+        alert("Please login first.");
+        window.location.href = "index.html";
+        return;
+    }
+
+    const reason = prompt(
+        "Enter the reason for rejecting this outpass:"
+    );
+
+    if (reason === null) {
+        return;
+    }
+
+    if (!reason.trim()) {
+        alert("Rejection reason is required.");
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/mentor/requests/${requestId}/reject`,
+            {
+                method: "PATCH",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+
+                body: JSON.stringify({
+                    reason: reason.trim()
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        console.log("Reject response:", data);
+
+        if (!response.ok) {
+            alert(data.detail || "Unable to reject request.");
             return;
         }
 
+        alert(
+            "Outpass rejected successfully!\n\n" +
+            "Request ID: " + data.request_id
+        );
 
-        // Update status
-        statusCell.textContent = "Rejected";
+        loadMentorRequests();
 
-        statusCell.className = "status rejected";
+    } catch (error) {
 
+        console.error("Reject error:", error);
 
-        // Disable buttons
-        const approveButton = row.querySelector(".approve-btn");
-        const rejectButton = row.querySelector(".reject-btn");
-
-        approveButton.disabled = true;
-        rejectButton.disabled = true;
-
-
-        // Update statistics
-        updateStatistics();
-
-
-        alert("Outpass request rejected successfully.");
-
-    });
-
-});
-
-
-// ========================================
-// INITIAL STATISTICS
-// ========================================
-
-updateStatistics();
+        alert(
+            "Cannot connect to backend server."
+        );
+    }
+}
